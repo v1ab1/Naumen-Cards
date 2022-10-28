@@ -1,24 +1,43 @@
 import { useState} from 'react';
-import { StyleSheet, View, ImageBackground, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, ImageBackground, Text, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
 
 const background = '../assets/login-background.png';
 
-export const Login = () => (
-    <View style={styles.container}>
-      <ImageBackground source={require(background)} resizeMode="cover" style={styles.image}>
-        <View>
-            <Text style={styles.text}>Добро пожаловать</Text>
-        </View>
-        <View style={styles.loginWrapper}>
-            <TouchableHighlight style={styles.button} underlayColor="white">
-                <Text style={styles.buttonText}>
-                    Погрузимся в мир NFT
-                </Text>
-            </TouchableHighlight>
-        </View>
-      </ImageBackground>
-    </View>
-  );
+export const Login = () => {
+    const [email, setEmail] = useState("");
+    const [pass, setPass] = useState("");
+    return (
+        <View style={styles.container}>
+        <ImageBackground source={require(background)} resizeMode="cover" style={styles.image}>
+          <View>
+              <Text style={styles.text}>Добро пожаловать</Text>
+          </View>
+          <KeyboardAvoidingView behavior='padding' style={styles.loginWrapper}>
+              <TextInput
+                  style={styles.input}
+                  onChangeText={setEmail}
+                  value={email}
+                  placeholder="Email"
+                  placeholderTextColor="white"
+              />
+              <TextInput 
+                  style={styles.input}
+                  onChangeText={setPass}
+                  value={pass}
+                  placeholder="Password"
+                  placeholderTextColor="white"
+              />
+              <TouchableHighlight style={styles.button} underlayColor="white">
+                  <Text style={styles.buttonText}>
+                      Погрузимся в мир NFT
+                  </Text>
+              </TouchableHighlight>
+          </KeyboardAvoidingView>
+        </ImageBackground>
+      </View>
+    );
+};
   
   const styles = StyleSheet.create({
     container: {
@@ -31,7 +50,7 @@ export const Login = () => (
       justifyContent: "space-between"
     },
     text: {
-      fontSize: 42,
+      fontSize: 28,
       lineHeight: 84,
       fontWeight: "bold",
       textAlign: "center",
@@ -45,15 +64,29 @@ export const Login = () => (
         paddingHorizontal: 30,
         borderRadius: 30,
         fontSize: 15,
-        marginVertical: 40,
+        marginBottom: 40,
         marginHorizontal: 68,
+        marginTop: 20
     },
     buttonText: {
         color: "white",
         letterSpacing: -0.36,
-        fontWeight: 600,
         fontSize: 16,
-        lineHeight: 20
+        lineHeight: 20,
+        fontWeight: "bold"
+    },
+    input: {
+        width: 300,
+        height: 70,
+        color: "white",
+        fontSize: 30,
+        letterSpacing: 0.32,
+        borderWidth: 1,
+        borderRadius: 30,
+        borderColor: 'white',
+        paddingHorizontal: 20,
+        paddingVertical: 0,
+        marginVertical: 20
     },
     loginWrapper: {
         backgroundColor: "rgba(89, 70, 119, 1)",
