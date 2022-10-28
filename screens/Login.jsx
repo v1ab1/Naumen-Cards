@@ -18,14 +18,14 @@ export const Login = () => {
                   style={styles.input}
                   onChangeText={setEmail}
                   value={email}
-                  placeholder="Email"
+                  placeholder="Почта"
                   placeholderTextColor="white"
               />
               <TextInput 
                   style={styles.input}
                   onChangeText={setPass}
                   value={pass}
-                  placeholder="Password"
+                  placeholder="Пароль"
                   placeholderTextColor="white"
               />
               <TouchableHighlight style={styles.button} underlayColor="white">
@@ -60,7 +60,7 @@ export const Login = () => {
     button: {
         backgroundColor: "rgba(151, 169, 246, 1)",
         color: "white",
-        paddingVertical: 15,
+        paddingVertical: 20,
         paddingHorizontal: 30,
         borderRadius: 30,
         fontSize: 15,
@@ -77,7 +77,7 @@ export const Login = () => {
     },
     input: {
         width: 300,
-        height: 70,
+        height: 60,
         color: "white",
         fontSize: 30,
         letterSpacing: 0.32,
@@ -86,14 +86,15 @@ export const Login = () => {
         borderColor: 'white',
         paddingHorizontal: 20,
         paddingVertical: 0,
-        marginVertical: 20
+        marginVertical: 10
     },
     loginWrapper: {
-        backgroundColor: "rgba(89, 70, 119, 1)",
         BackgroundBlendMode: "overlay",
         backdropFilter: "blur",
         marginVertical: 150,
         alignItems: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        paddingTop: 30,
+        borderRadius: 40
     }
   });
