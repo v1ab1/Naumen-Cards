@@ -2,6 +2,7 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native"
 
 import { FlatList } from "react-native-gesture-handler";
 import { baseUrl } from "../baseUrl";
+import { MarketCards } from '../components/MarketCards';
 
 
 
@@ -34,26 +35,5 @@ export const Inventory = (props) => {
     )
 }
 
-const styles = StyleSheet.create(
-    {
-        inventory:{
-            backgroundColor:"#FF9F40",
-            height: "95%",
-            width: "95%",
-            opacity: 0.6
-        },
-        item:{
-            marginTop: 5,
-            marginHorizontal: 10,
-            flexWrap: 'wrap', 
-            alignItems: 'flex-start',
-            flexDirection:'row',
-        },
-        itemimg:{
-            width: 50,
-            height: 50,
-            marginEnd: 5
-        },
-        
-    }
-)
+const styles = StyleSheet.create({
+});
