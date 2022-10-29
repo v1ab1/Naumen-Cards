@@ -28,8 +28,8 @@ export const Login = () => {
                   placeholder="Пароль"
                   placeholderTextColor="white"
               />
-              <TouchableHighlight style={styles.button} underlayColor="white">
-                  <Text style={styles.buttonText}>
+              <TouchableHighlight style={styles.button} underlayColor="white"  >
+                  <Text style={styles.buttonText} >
                       Погрузимся в мир NFT
                   </Text>
               </TouchableHighlight>
