@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 110,
         overflow: "hidden",
-        borderRadius: "50%"
+        borderRadius: "50%",
+        zIndex: 100
     },
     navbarWrapper: {
         flexDirection: "row",
@@ -48,8 +49,9 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     image: {
-        width: 50,
-        resizeMode: "contain"
+        width: 80,
+        resizeMode: "contain",
+        opacity: "0.5"
     },
     plus: {
         width: 100,

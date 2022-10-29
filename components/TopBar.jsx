@@ -8,7 +8,7 @@ export const TopBar = ({avatar, name, coins}) => {
         <BlurView style={styles.topbarWrapper}>
             <View>
                 <Text style={styles.text}>{name}</Text>
-                <Image source={avatar} />
+                <Image source={require(avatar)} />
             </View>
             <View style={styles.wrap}>
                 <Text style={styles.text}>{coins}</Text>
@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingBottom: 20
+        paddingBottom: 20,
+        zIndex: 100
     },
     text: {
         fontSize: 20,
@@ -35,9 +36,9 @@ const styles = StyleSheet.create({
         alignSelf: "center"
     },
     coin: {
-        width: 30,
+        width: 25,
         resizeMode: "contain",
-        height: 30,
+        height: 25,
         alignSelf: "center"
     },
     wrap: {
