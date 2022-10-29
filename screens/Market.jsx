@@ -8,11 +8,11 @@ import { BlurView } from 'expo-blur';
 
 const plus = '../assets/plus.png';
 
-export const Market = ({name}) => {
+export const Market = ({name, navigation}) => {
     return (
         <View style={styles.container}>
             <TopBar />
-            <NavBar />
+            <NavBar navigation={navigation}/>
             <View style={styles.itemsWrapper}>
                 <Text style={styles.header}>Маркет</Text>
                 <View style={styles.rounded}>
