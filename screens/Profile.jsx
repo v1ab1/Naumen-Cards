@@ -4,25 +4,18 @@ import { Inventory } from "./Inventory";
 import axios from "axios";
 import { useEffect, useState } from "react";
 const baseUrl = "http://172.20.10.9:5000"
- 
-// axios({
-//     method: "get",
-//     url: `${baseUrl}/get_items?login=stirk`,
+import { NavBar } from '../components/NavBar';
+import { TopBar } from '../components/TopBar';
+import { SelectedInventoryItem } from "./SelectedInventoryItem";
+
+
+export function Profile(props) {
     
-//   })
-//   .then((res) => {
-//     //setItems(res.data);
-//     console.log(items)
-//   })
-
-  
-
-
-export function Profile() {
-    console.log("prof")
     const [items , setItems] = useState([
         {title:"item1"}
     ])
+    const [viewItem, setViewItem] = useState(false)
+    const [selectedItem, setselectedItem] = useState();
 
     useEffect(() => {
         axios.get(`${baseUrl}/get_items?login=stirk`)
@@ -34,53 +27,21 @@ export function Profile() {
     let balance = 0;
 
     return (
-        <View style={styles.container}>
+        <View>
+          <TopBar/>
+          <View style={styles.container}>
             <View style={styles.header}>
-              <View style={styles.headerContent}>
-                  {/* <Image style={styles.avatar}
-                    source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/> */}
-  
-                
-                  <Text style={styles.name}>John Doe </Text>
-                  
-                  <Text style={styles.userInfo}>Balance: {balance} </Text>
-              </View>
+              
             </View>
   
             <View style={styles.body}>
-
-                    <Inventory items={items}/>
-
-
-              {/* <View style={styles.item}>
-                <View style={styles.iconContent}>
-                  <Image style={styles.icon} source={{uri: 'https://img.icons8.com/color/70/000000/cottage.png'}}/>
-                </View>
-                <View style={styles.infoContent}>
-                  <Text style={styles.info}>Home</Text>
-                </View>
-              </View>
-  
-              <View style={styles.item}>
-                <View style={styles.iconContent}>
-                  <Image style={styles.icon} source={{uri: 'https://img.icons8.com/color/70/000000/administrator-male.png'}}/>
-                </View>
-                <View style={styles.infoContent}>
-                  <Text style={styles.info}>Settings</Text>
-                </View>
-              </View>
-
-  
-              <View style={styles.item}>
-                <View style={styles.iconContent}>
-                  <Image style={styles.icon} source={{uri: 'https://img.icons8.com/color/70/000000/facebook-like.png'}}/>
-                </View>
-                <View style={styles.infoContent}>
-                  <Text style={styles.info}>Shop</Text>
-                </View>
-              </View> */}
-  
+              {viewItem ? <SelectedInventoryItem item={selectedItem} setViewItem={setViewItem}/> : <Inventory items={items} selectItem={setselectedItem} setViewItem={setViewItem}/>}
+                    
+                    
             </View>
+            
+          </View>
+          <NavBar navigation={props.navigation}/>
         </View>
       );
 }
@@ -118,9 +79,9 @@ const styles = StyleSheet.create({
       fontWeight:'600',
     },
     body:{
-      
+      paddingTop: 150,
       backgroundColor: "#211134",
-      height:1200,
+      height: "100%",
       alignItems:'center',
     },
     item:{

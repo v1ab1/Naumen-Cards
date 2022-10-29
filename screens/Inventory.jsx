@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Image } from "react-native"
+import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native"
 
 import { FlatList } from "react-native-gesture-handler";
 
@@ -17,11 +17,14 @@ export const Inventory = (props) => {
         renderItem={
             ({item}) => {
                 return (
-                    <View style={styles.item}>
-                        <Image style={styles.itemimg} source={{uri: "https://imgholder.ru/150x150/8493a8/adb9ca&text=IMAGE+HOLDER&font=kelson"}} />
-                        <Text >{item.title} </Text> 
-                        <Text >{item.description} </Text>
-                    </View>
+                    <TouchableOpacity onPress={() => {props.selectItem(item); props.setViewItem(true)}}>
+                        <View style={styles.item} >
+                            <Image style={styles.itemimg} source={{uri: "https://imgholder.ru/150x150/8493a8/adb9ca&text=IMAGE+HOLDER&font=kelson"}} />
+                            <Text >{item.title} </Text> 
+                            <Text >{item.description} </Text>
+                        </View>
+                    </TouchableOpacity>
+                    
                 )
             }
         }

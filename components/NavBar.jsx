@@ -1,21 +1,29 @@
-import { StyleSheet, View, Image, Text, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableHighlight, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import { BlurView } from 'expo-blur';
-
+import { NavigationContainer } from '@react-navigation/native';
 
 const profile = '../assets/profile.png';
 const market = '../assets/market.png';
 const plus = '../assets/plus.png';
 
-export const NavBar = () => {
+export const NavBar = (props) => {
     return (
         <View style={styles.br}>
             <BlurView style={styles.navbarWrapper}>
-                <View style={styles.imageWrapper}>
-                    <Image style={styles.image} source={require(profile)} />
-                </View>
-                <View style={styles.imageWrapper}>
-                    <Image style={styles.plus} source={require(plus)} />
-                </View>
+                <TouchableOpacity onPress={() => {
+                    props.navigation.navigate("Profile")
+                }}>
+                    <View style={styles.imageWrapper}>
+                        <Image style={styles.image} source={require(profile)} />
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {
+                    props.navigation.navigate("AddingItem")
+                    }}>
+                    <View style={styles.imageWrapper}>
+                        <Image style={styles.plus} source={require(plus)} />
+                    </View>
+                </TouchableOpacity>
                 <View style={styles.imageWrapper}>
                     <Image style={styles.image} source={require(market)} />
                 </View>

@@ -8,7 +8,7 @@ export const TopBar = ({avatar, name, coins}) => {
         <BlurView style={styles.topbarWrapper}>
             <View>
                 <Text style={styles.text}>{name}</Text>
-                <Image source={require(avatar)} />
+                <Image source={avatar} />
             </View>
             <View style={styles.wrap}>
                 <Text style={styles.text}>{coins}</Text>
