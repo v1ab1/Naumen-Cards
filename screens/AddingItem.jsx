@@ -9,7 +9,7 @@ import { baseUrl } from "../baseUrl";
 import * as ImagePicker from 'expo-image-picker'
 
 let RegistrateItem = (item, login, photo) => {
-    console.log(photo);
+    
     const createFormData = (photo) => {
         const data = new FormData();
       

@@ -1,10 +1,33 @@
 import { useState} from 'react';
 import { StyleSheet, View, ImageBackground, Text, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+import React, { useContext } from "react";
+import { Context } from '../Context';
+import axios from 'axios';
+import { baseUrl } from '../baseUrl';
 
 const background = '../assets/login-background.png';
 
-export const Login = () => {
+let LoginRequest = (login, password) => {
+  const [context, setContext] = useContext(Context);
+  let flag = false;
+  console.log(1);
+  axios.post(`${baseUrl}/login?login=${login}&password=${password}`).
+  then((resp) => {
+    
+    if(resp.data == "200"){
+      
+      setContext(login);
+      flag = true;
+    }
+  })
+  .catch((err) => {console.log(err)});
+  return false;
+}
+
+
+
+export const Login = (props) => {
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
     return (
@@ -28,7 +51,11 @@ export const Login = () => {
                   placeholder="Пароль"
                   placeholderTextColor="white"
               />
-              <TouchableHighlight style={styles.button} underlayColor="white"  >
+              <TouchableHighlight style={styles.button} underlayColor="white" onPress={() => {
+                if(LoginRequest === true){
+                  props.navigation.navigate("Profile")
+                }
+              }} >
                   <Text style={styles.buttonText} >
                       Погрузимся в мир NFT
                   </Text>
