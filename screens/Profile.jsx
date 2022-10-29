@@ -40,7 +40,6 @@ export function Profile(props) {
       }
     };
 
-
     useEffect(() => {
         axios.get(`${baseUrl}/get_items?login=${context.login}`)
             .then((res) => setItems(res.data));
@@ -59,12 +58,12 @@ export function Profile(props) {
               <TouchableOpacity onPress={() => {
                 setviewSubscribes(false);
               }}>
-                <Text style={[styles.header, styles.active]}>Инвентарь</Text>
+                <Text style={[styles.header, viewSubscribes ? null : styles.active]}>Инвентарь</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => {
                 setviewSubscribes(true);
               }}>
-                <Text style={styles.header}>Подписки</Text>
+                <Text style={[styles.header, viewSubscribes ? styles.active : null]}>Подписки</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.rounded}>
