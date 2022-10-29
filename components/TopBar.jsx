@@ -1,17 +1,32 @@
 import { StyleSheet, View, Image, Text, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import { BlurView } from 'expo-blur';
+import { Context } from '../Context';
+import { useContext } from 'react';
+import { baseUrl } from '../baseUrl';
 
 const nau = "../assets/naucoins.png";
 
+import axios from 'axios';
+export const UpdateCoins = (context, setContext) => {
+    
+    axios.get(`${baseUrl}/get_coins?login=${context.login}`).
+    then((resp) => {
+        context.coins = resp.data;
+        setContext(context);
+    })
+}
+
 export const TopBar = ({avatar, name, coins}) => {
+    const [context, setContext] = useContext(Context);
+
     return (
         <BlurView style={styles.topbarWrapper}>
             <View>
-                <Text style={styles.text}>{name}</Text>
+                <Text style={styles.text}>{context.login}</Text>
                 <Image source={avatar} />
             </View>
             <View style={styles.wrap}>
-                <Text style={styles.text}>{coins}</Text>
+                <Text style={styles.text}>{context.coins}</Text>
                 <Image style={styles.coin} source={require(nau)} />
             </View>
         </BlurView>

@@ -1,35 +1,35 @@
 import { useState} from 'react';
 import { StyleSheet, View, ImageBackground, Text, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Context } from '../Context';
 import axios from 'axios';
 import { baseUrl } from '../baseUrl';
-
 const background = '../assets/login-background.png';
 
-let LoginRequest = (login, password) => {
-  const [context, setContext] = useContext(Context);
-  let flag = false;
-  console.log(1);
-  axios.post(`${baseUrl}/login?login=${login}&password=${password}`).
-  then((resp) => {
-    
-    if(resp.data == "200"){
-      
-      setContext(login);
-      flag = true;
-    }
-  })
-  .catch((err) => {console.log(err)});
-  return false;
-}
+import { UpdateCoins } from '../components/TopBar';
 
 
 
 export const Login = (props) => {
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
+    const [context, setContext] = useContext(Context);
+
+    let LoginRequest = (login, password, callBack) => {
+      let resp = axios.get(`${baseUrl}/login?login=${login}&password=${password}`)
+      .then((resp)=>{
+        if(resp.data === 200){
+          context.login = login;
+          context.coints = 0;
+          setContext(context);
+          UpdateCoins(context, setContext);
+          callBack();
+        }
+      })
+    }
+
+
     return (
         <View style={styles.container}>
         <ImageBackground source={require(background)} resizeMode="cover" style={styles.image}>
@@ -52,9 +52,8 @@ export const Login = (props) => {
                   placeholderTextColor="white"
               />
               <TouchableHighlight style={styles.button} underlayColor="white" onPress={() => {
-                if(LoginRequest === true){
-                  props.navigation.navigate("Profile")
-                }
+                  
+                let res = LoginRequest(email, pass, () => { props.navigation.navigate("Profile")});
               }} >
                   <Text style={styles.buttonText} >
                       Погрузимся в мир NFT

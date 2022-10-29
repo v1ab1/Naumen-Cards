@@ -5,7 +5,8 @@ import { TopBar } from '../components/TopBar';
 import { StyleSheet } from "react-native";
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
-
+import { useContext } from "react";
+import { Context } from '../Context';
 import * as ImagePicker from 'expo-image-picker'
 
 let RegistrateItem = (item, login, photo) => {
@@ -34,6 +35,7 @@ export function AddingItem(props) {
     const [itemName, setitemName] = useState();
     const [itemPrice, setitemPrice] = useState();
     const [itemDescription, setitemDescription] = useState();
+    const [context, setContext] = useContext(Context);
 
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -74,7 +76,7 @@ export function AddingItem(props) {
                     RegistrateItem({
                         name: itemName,
                         description: itemDescription
-                    }, "stirk", image);
+                    }, context.login, image);
                 }}>
                     <Text>Add Item</Text>
                 </TouchableOpacity>

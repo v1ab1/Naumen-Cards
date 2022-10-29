@@ -1,5 +1,5 @@
 
-import { StyleSheet, View, Text,Image } from "react-native";
+import { StyleSheet, View, Text,Image, TouchableOpacity } from "react-native";
 import { Inventory } from "./Inventory";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -7,35 +7,54 @@ const baseUrl = "http://172.20.10.9:5000"
 import { NavBar } from '../components/NavBar';
 import { TopBar } from '../components/TopBar';
 import { SelectedInventoryItem } from "./SelectedInventoryItem";
+import { Context } from "../Context";
+import { useContext } from "react";
+import { Subscribes } from "../components/Subscribes";
 
 
 export function Profile(props) {
-    
+    const [context, setContext] = useContext(Context);
     const [items , setItems] = useState([
-        {title:"item1"}
+        {title:"not connect to server"}
     ])
+    const [subscribes , setSubscribes] = useState([
+      "not connect to server"
+  ])
     const [viewItem, setViewItem] = useState(false)
     const [selectedItem, setselectedItem] = useState();
+    const [viewSubscribes, setviewSubscribes] = useState(true);
+
 
     useEffect(() => {
-        axios.get(`${baseUrl}/get_items?login=stirk`)
-            .then((res) => setItems(res.data))
+        axios.get(`${baseUrl}/get_items?login=${context.login}`)
+            .then((res) => setItems(res.data));
+        axios.get(`${baseUrl}/get_friends?login=${context.login}`)
+        .then((res) => setSubscribes(res.data));
     }, [])
 
     
-
-    let balance = 0;
 
     return (
         <View>
           <TopBar/>
           <View style={styles.container}>
-            <View style={styles.header}>
-              
-            </View>
+            
   
             <View style={styles.body}>
-              {viewItem ? <SelectedInventoryItem item={selectedItem} setViewItem={setViewItem}/> : <Inventory items={items} selectItem={setselectedItem} setViewItem={setViewItem}/>}
+            <View style={styles.header}>
+              <TouchableOpacity onPress={() => {
+                setviewSubscribes(false);
+              }}>
+                <Text>Inventory</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {
+                setviewSubscribes(true);
+              }}>
+                <Text>Subscribes</Text>
+              </TouchableOpacity>
+            </View>
+              {viewSubscribes ? <Subscribes subscribes={subscribes}/> :
+              viewItem ? <SelectedInventoryItem item={selectedItem} setViewItem={setViewItem}/> : <Inventory items={items} selectItem={setselectedItem} setViewItem={setViewItem}/>}
                     
                     
             </View>
@@ -54,7 +73,8 @@ const styles = StyleSheet.create({
         opacity: 0.6
     },
     header:{
-      backgroundColor: "#111134",
+      
+      backgroundColor: "#ffffff",
     },
     headerContent:{
       padding:30,
@@ -80,6 +100,7 @@ const styles = StyleSheet.create({
     },
     body:{
       paddingTop: 150,
+
       backgroundColor: "#211134",
       height: "100%",
       alignItems:'center',
