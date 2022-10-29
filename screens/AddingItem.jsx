@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { View, Text, TextInput,TouchableOpacity, Button,Image } from "react-native";
+import { View, Text, TextInput,TouchableOpacity, Button, Image, KeyboardAvoidingView, ImageBackground } from "react-native";
 import { NavBar } from '../components/NavBar';
 import { TopBar } from '../components/TopBar';
 import { StyleSheet } from "react-native";
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
-import { useContext } from "react";
-import { Context } from '../Context';
+import { BlurView } from 'expo-blur';
+
 import * as ImagePicker from 'expo-image-picker'
 
 let RegistrateItem = (item, login, photo) => {
@@ -26,7 +26,7 @@ let RegistrateItem = (item, login, photo) => {
     axios.post(`${baseUrl}/upload_item?login=${login}&name=${item.name}&description=${item.description}`, data);
 }
 
-
+const background = '../assets/5.png';
 
 
 
@@ -35,7 +35,6 @@ export function AddingItem(props) {
     const [itemName, setitemName] = useState();
     const [itemPrice, setitemPrice] = useState();
     const [itemDescription, setitemDescription] = useState();
-    const [context, setContext] = useContext(Context);
 
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -54,36 +53,63 @@ export function AddingItem(props) {
       };
 
     return (
-        <View style={styles.body}>
+        <ImageBackground source={require(background)} style={styles.body}>
             <TopBar />
             <View style={styles.content}>
-                <Text>Registrate item</Text>
-                <Button title="Pick an image from camera roll" onPress={pickImage} />
-                {image && <Image source={{ uri: image.uri }} style={{ width: 200, height: 200 }} />}
-                <TextInput
-                    onChangeText={setitemName}
-                    value={itemName}
-                    placeholder="Name"
-                    placeholderTextColor="white"
-                />
-                <TextInput
-                    onChangeText={setitemDescription}
-                    value={itemDescription}
-                    placeholder="description"
-                    placeholderTextColor="white"
-                />
-                <TouchableOpacity onPress={() => {
-                    RegistrateItem({
-                        name: itemName,
-                        description: itemDescription
-                    }, context.login, image);
-                }}>
-                    <Text>Add Item</Text>
-                </TouchableOpacity>
-                
+                <Text style={styles.header}>Загрузка своего NFT</Text>
+                <View style={styles.rounded}>
+                    <BlurView intensity={40} style={styles.blurWrap}>
+                        <View>
+                            <View style={styles.view}>
+                                <BlurView intensity={60} style={styles.blur}>
+                                    <TextInput
+                                    onChangeText={setitemName}
+                                    value={itemName}
+                                    placeholder="Название..."
+                                    placeholderTextColor="rgba(255,255,255,0.75)"
+                                    style={styles.input}
+                                    />
+                                </BlurView>
+                            </View>
+                            <View style={styles.view}>
+                                <BlurView intensity={60} style={styles.blur}>
+                                    <TextInput
+                                    onChangeText={setitemDescription}
+                                    value={itemDescription}
+                                    placeholder="Описание..."
+                                    placeholderTextColor="rgba(255,255,255,0.75)"
+                                    style={styles.input}
+                                    />
+                                </BlurView>
+                            </View>
+                            {image && <Image source={{ uri: image.uri }} style={styles.image} />}
+                        </View>
+                        <View style={styles.pickerView}>
+                            <BlurView intensity={70} style={styles.pickerBlur}>
+                                <TouchableOpacity style={styles.pickButton} onPress={pickImage}>
+                                    <Text style={styles.pickText}>
+                                        Выбрать картинку
+                                    </Text>
+                                </TouchableOpacity>
+                            </BlurView>
+                        </View>
+                    </BlurView>
+                </View>
+                <View style={[styles.rounded, styles.fix]}>
+                    <BlurView intensity={60} style={styles.pickerBlur}>
+                        <TouchableOpacity style={styles.pickButton} onPress={() => {
+                            RegistrateItem({
+                                name: itemName,
+                                description: itemDescription
+                            }, "stirk", image);
+                            }}>
+                            <Text style={[styles.pickText, styles.fixText]}>Опубликовать</Text>
+                        </TouchableOpacity>
+                    </BlurView>
+                </View>
             </View>
             <NavBar navigation={props.navigation}/>
-        </View>
+        </ImageBackground>
       );
 }
 
@@ -91,12 +117,78 @@ const styles = StyleSheet.create({
     body:{
         width: "100%",
         height: "100%",
-        backgroundColor: "#67237F",
+        backgroundColor: "#492675",
         
     },
     content:{
-        paddingTop: 150,
+        paddingTop: "30%",
         marginHorizontal: 20
-        
+    },
+    header: {
+        color: "white",
+        fontSize: 32
+    },
+    image: {
+        width: 280,
+        height: 280,
+        resizeMode: "contain",
+        marginVertical: 15,
+        alignSelf: "center"
+    },
+    rounded: {
+        marginTop: 15,
+        borderRadius: 40,
+        overflow: "hidden",
+        height: "72%"
+    },
+    blurWrap: {
+        height: "100%",
+        paddingVertical: "5%",
+        paddingHorizontal: "4%",
+        justifyContent: "space-between"
+    },
+    pickText: {
+        color: "white",
+        alignSelf: "center",
+        fontSize: 24,
+        height: "100%",
+        paddingVertical: "3%"
+    },
+    pickerView: {
+        overflow: "hidden",
+        borderRadius: 40,
+        width: "70%",
+        height: "10%",
+        alignSelf: "center"
+    },
+    pickerBlur: {
+        height: "100%",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    fix: {
+        height: "8%",
+        width: "60%",
+        alignSelf: "center"
+    },
+    fixText: {
+        paddingVertical: "5%"
+    },
+    view: {
+        overflow: "hidden",
+        borderRadius: 40,
+        height: 40,
+        width: "100%",
+        paddingVertical: 0,
+        marginVertical: 7
+    },
+    blur: {
+        height: "100%"
+    },
+    input: {
+        height: "100%",
+        paddingHorizontal: 10,
+        fontSize: 18,
+        color: "white"
     }
   });
