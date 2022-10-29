@@ -3,6 +3,7 @@ import { StyleSheet, View, ScrollView, Image, Text, TouchableHighlight, Keyboard
 import { TextInput } from 'react-native-gesture-handler';
 import { NavBar } from '../components/NavBar';
 import { TopBar } from '../components/TopBar';
+import { BlurView } from 'expo-blur';
 
 const plus = '../assets/plus.png';
 
@@ -11,9 +12,14 @@ export const Market = ({name}) => {
         <View style={styles.container}>
             <TopBar />
             <NavBar />
-            <ScrollView style={styles.items}>
-                <Text>Маркет</Text>
-            </ScrollView>
+            <View style={styles.itemsWrapper}>
+                <Text style={styles.header}>Маркет</Text>
+                <View style={styles.rounded}>
+                    <BlurView style={styles.items}>
+                        <Text>1</Text>
+                    </BlurView>
+                </View>
+            </View>
         </View>
     );
 };
@@ -26,14 +32,31 @@ const styles = StyleSheet.create({
         backgroundColor: "#492675",
         position: 'relative'
     },
-    items: {
+    itemsWrapper: {
         width: "100%",
         height: "100%",
-        paddingTop: 120
+        paddingTop: "30%"
     },
     image: {
         height: 1000,
         color: "white",
-        fontSize: 400
+        fontSize: 400,
+    },
+    header: {
+        fontSize: 40,
+        color: "white",
+        paddingHorizontal: 30
+    },
+    rounded: {
+        overflow: "hidden",
+        borderRadius: 40,
+        background: "black",
+        marginTop: 15,
+        width: "90%",
+        alignSelf: "center",
+        height: "72%"
+    },
+    items: {
+        height: "100%"
     }
 });
