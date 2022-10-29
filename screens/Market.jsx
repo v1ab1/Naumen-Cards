@@ -3,6 +3,7 @@ import { StyleSheet, View, ScrollView, Image, Text, TouchableHighlight, Keyboard
 import { TextInput } from 'react-native-gesture-handler';
 import { NavBar } from '../components/NavBar';
 import { TopBar } from '../components/TopBar';
+import { MarketCards } from '../components/MarketCards';
 import { BlurView } from 'expo-blur';
 
 const plus = '../assets/plus.png';
@@ -16,7 +17,6 @@ export const Market = ({name}) => {
                 <Text style={styles.header}>Маркет</Text>
                 <View style={styles.rounded}>
                     <BlurView style={styles.items}>
-                        <Text>1</Text>
                     </BlurView>
                 </View>
             </View>
