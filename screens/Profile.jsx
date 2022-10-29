@@ -1,8 +1,37 @@
 
 import { StyleSheet, View, Text,Image } from "react-native";
+import { Inventory } from "./Inventory";
+import axios from "axios";
+import { useEffect, useState } from "react";
+const baseUrl = "http://172.20.10.9:5000"
+ 
+// axios({
+//     method: "get",
+//     url: `${baseUrl}/get_items?login=stirk`,
+    
+//   })
+//   .then((res) => {
+//     //setItems(res.data);
+//     console.log(items)
+//   })
 
-export const Profile = () => {
+  
 
+
+export function Profile() {
+    console.log("prof")
+    const [items , setItems] = useState([
+        {title:"item1"}
+    ])
+
+    useEffect(() => {
+        axios.get(`${baseUrl}/get_items?login=stirk`)
+            .then((res) => setItems(res.data))
+    }, [])
+
+    
+
+    let balance = 0;
 
     return (
         <View style={styles.container}>
@@ -11,14 +40,19 @@ export const Profile = () => {
                   {/* <Image style={styles.avatar}
                     source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/> */}
   
+                
                   <Text style={styles.name}>John Doe </Text>
-                  <Text style={styles.userInfo}>jhonnydoe@mail.com </Text>
-                  <Text style={styles.userInfo}>Florida </Text>
+                  
+                  <Text style={styles.userInfo}>Balance: {balance} </Text>
               </View>
             </View>
   
             <View style={styles.body}>
-              <View style={styles.item}>
+
+                    <Inventory items={items}/>
+
+
+              {/* <View style={styles.item}>
                 <View style={styles.iconContent}>
                   <Image style={styles.icon} source={{uri: 'https://img.icons8.com/color/70/000000/cottage.png'}}/>
                 </View>
@@ -35,15 +69,7 @@ export const Profile = () => {
                   <Text style={styles.info}>Settings</Text>
                 </View>
               </View>
-  
-              <View style={styles.item}>
-                <View style={styles.iconContent}>
-                  <Image style={styles.icon} source={{uri: 'https://img.icons8.com/color/70/000000/filled-like.png'}}/>
-                </View>
-                <View style={styles.infoContent}>
-                  <Text style={styles.info}>News</Text>
-                </View>
-              </View>
+
   
               <View style={styles.item}>
                 <View style={styles.iconContent}>
@@ -52,7 +78,7 @@ export const Profile = () => {
                 <View style={styles.infoContent}>
                   <Text style={styles.info}>Shop</Text>
                 </View>
-              </View>
+              </View> */}
   
             </View>
         </View>
@@ -60,12 +86,18 @@ export const Profile = () => {
 }
 
 const styles = StyleSheet.create({
+    inventory:{
+        backgroundColor:"#FF9F40",
+        height: "95%",
+        width: "95%",
+        opacity: 0.6
+    },
     header:{
-      backgroundColor: "#DCDCDC",
+      backgroundColor: "#111134",
     },
     headerContent:{
       padding:30,
-      alignItems: 'center',
+      alignItems: 'flex-end',
     },
     avatar: {
       width: 130,
@@ -77,7 +109,7 @@ const styles = StyleSheet.create({
     },
     name:{
       fontSize:22,
-      color:"#000000",
+      color:"#ffffff",
       fontWeight:'600',
     },
     userInfo:{
@@ -86,8 +118,9 @@ const styles = StyleSheet.create({
       fontWeight:'600',
     },
     body:{
-      backgroundColor: "#778899",
-      height:500,
+      
+      backgroundColor: "#211134",
+      height:1200,
       alignItems:'center',
     },
     item:{
