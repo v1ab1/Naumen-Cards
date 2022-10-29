@@ -1,10 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-<<<<<<< HEAD
-=======
-import { StyleSheet, Text, View } from 'react-native';
->>>>>>> parent of 513453a (test)
-import { Navigation } from './screens/Navigation';
 
+import { StyleSheet, Text, View } from 'react-native';
+
+import { Navigation } from './screens/Navigation';
+//kekw
 export default function App() {
   return <Navigation />;
 }
