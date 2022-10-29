@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { Context } from '../Context';
 import axios from 'axios';
 import { baseUrl } from '../baseUrl';
+import { BlurView } from 'expo-blur';
 const background = '../assets/login-background.png';
 
 import { UpdateCoins } from '../components/TopBar';
@@ -37,19 +38,21 @@ export const Login = (props) => {
               <Text style={styles.text}>Добро пожаловать</Text>
           </View>
           <KeyboardAvoidingView behavior='padding' style={styles.loginWrapper}>
+            <BlurView intensity={20} style={styles.blur}>
               <TextInput
                   style={styles.input}
                   onChangeText={setEmail}
                   value={email}
                   placeholder="Почта"
-                  placeholderTextColor="white"
+                  placeholderTextColor="rgba(255,255,255,0.6)"
               />
               <TextInput 
+                  secureTextEntry={true}
                   style={styles.input}
                   onChangeText={setPass}
                   value={pass}
                   placeholder="Пароль"
-                  placeholderTextColor="white"
+                  placeholderTextColor="rgba(255,255,255,0.6)"
               />
               <TouchableHighlight style={styles.button} underlayColor="white" onPress={() => {
                   
@@ -59,6 +62,7 @@ export const Login = (props) => {
                       Погрузимся в мир NFT
                   </Text>
               </TouchableHighlight>
+            </BlurView>
           </KeyboardAvoidingView>
         </ImageBackground>
       </View>
@@ -120,12 +124,17 @@ export const Login = (props) => {
         marginVertical: 150,
         alignItems: 'center',
         alignSelf: 'center',
-        paddingTop: 30,
         borderRadius: 40,
-        backgroundColor: "rgba(33, 17, 52, 0.4)"
+        backgroundColor: "rgba(33, 17, 52, 0.4)",
+        overflow: "hidden"
     },
     loginBackground: {
       height: "100%",
       width: "100%"
+    },
+    blur: {
+      paddingTop: 30,
+      alignItems: 'center',
+      alignSelf: 'center'
     }
   });
