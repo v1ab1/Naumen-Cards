@@ -3,12 +3,12 @@ import { BlurView } from 'expo-blur';
 
 const nau = "../assets/naucoins.png";
 
-export const Follower = (props) => {
+export const Follower = ({item}) => {
     return (
         <View style={styles.cardWrapper}>
-            <Image style={styles.image} source={require(nau)} />
+            <Image style={styles.image} source={(nau)} />
             <Text style={styles.text}>
-                {props.name}
+                {item}
             </Text>
         </View>
     );
@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         justifyContent: "flex-start",
         width: "80%",
-        marginBottom: "5%"
+        marginBottom: "5%",
+        
     },
     image: {
         width: 80,

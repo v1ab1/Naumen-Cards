@@ -6,6 +6,8 @@ import { Context } from '../Context';
 import axios from 'axios';
 import { baseUrl } from '../baseUrl';
 import { BlurView } from 'expo-blur';
+import * as ImagePicker from 'expo-image-picker'
+
 const background = '../assets/login-background.png';
 
 import { UpdateCoins } from '../components/TopBar';
@@ -16,6 +18,7 @@ export const Login = (props) => {
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
     const [context, setContext] = useContext(Context);
+    const [alreadyHasAccount, setAlreadyHasAccount] = useState(true);
 
     let LoginRequest = (login, password, callBack) => {
       let resp = axios.get(`${baseUrl}/login?login=${login}&password=${password}`)
@@ -28,6 +31,34 @@ export const Login = (props) => {
           callBack();
         }
       })
+    }
+
+    const RegistrateRequest = (login, password, callback) => {
+      const createFormData = (photo) => {
+        const data = new FormData();
+      
+        data.append('file', {
+          name: photo.fileName,
+          type: photo.type,
+          uri: Platform.OS === 'ios' ? photo.uri.replace('file://', '') : photo.uri,
+        });
+        return data;
+      };
+      const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+        if (!result.cancelled) {
+          
+          axios.post(`${baseUrl}/register?login=${login}&password=${password}`, createFormData(result))
+          .then(() => {callback()});
+        }
+      };
+      pickImage();
     }
 
 
@@ -54,14 +85,36 @@ export const Login = (props) => {
                   placeholder="Пароль"
                   placeholderTextColor="rgba(255,255,255,0.6)"
               />
-              <TouchableHighlight style={styles.button} underlayColor="white" onPress={() => {
-                  
-                let res = LoginRequest(email, pass, () => { props.navigation.navigate("Profile")});
-              }} >
-                  <Text style={styles.buttonText} >
-                      Погрузимся в мир NFT
-                  </Text>
-              </TouchableHighlight>
+
+
+              {alreadyHasAccount ? 
+              <View>
+                <TouchableHighlight style={styles.button} underlayColor="white" onPress={() => {
+                  LoginRequest(email, pass, () => { props.navigation.navigate("Profile")});
+                }} >
+                    <Text style={styles.buttonText} >
+                        Погрузимся в мир NFT
+                    </Text>
+                </TouchableHighlight>
+                <TouchableHighlight onPress={() => {setAlreadyHasAccount(false)}}>
+                  <Text>У меня еще нет аккаунта</Text>
+                </TouchableHighlight>
+              </View>
+               : 
+               <View>
+                <TouchableHighlight style={styles.button} underlayColor="white" onPress={() => {
+                  RegistrateRequest(email, pass, () => { props.navigation.navigate("Profile")});
+                }} >
+                    <Text style={styles.buttonText} >
+                        Регистрация
+                    </Text>
+                </TouchableHighlight>
+                <TouchableHighlight onPress={() => {setAlreadyHasAccount(true)}}>
+                  <Text>У меня еуже есть аккаунт</Text>
+                </TouchableHighlight>
+              </View> }
+              
+
             </BlurView>
           </KeyboardAvoidingView>
         </ImageBackground>

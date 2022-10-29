@@ -12,7 +12,7 @@ export const Subscribes = (props) => {
         <View>
             <FlatList
         data={props.subscribes}
-        renderItem={SubscribeItem}
+        renderItem={Follower}
         />
         </View>
     )

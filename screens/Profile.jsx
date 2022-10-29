@@ -24,6 +24,21 @@ export function Profile(props) {
     const [viewItem, setViewItem] = useState(false)
     const [selectedItem, setselectedItem] = useState();
     const [viewSubscribes, setviewSubscribes] = useState(true);
+    const [image , setImage] = useState();
+
+    const pickImage = async () => {
+      // No permissions request is necessary for launching the image library
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+      if (!result.cancelled) {
+        setImage(result);
+        
+      }
+    };
 
 
     useEffect(() => {
