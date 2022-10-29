@@ -13,8 +13,8 @@ export const Navigation = () => {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-        <Stack.Screen name="Profile" component={Profile} options={{headerShown: false }} />
           <Stack.Screen name="Login" component={Login} options={{headerShown: false }} />
+          <Stack.Screen name="Profile" component={Profile} options={{headerShown: false }} />
           <Stack.Screen name="AddingItem" component={AddingItem} options={{headerShown: false }} />
           <Stack.Screen name="Market" component={Market} options={{headerShown: false }} />
         </Stack.Navigator>

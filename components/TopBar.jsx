@@ -1,13 +1,16 @@
 import { StyleSheet, View, Image, Text, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import { BlurView } from 'expo-blur';
-
+import { Context } from '../Context';
+import { useContext } from 'react';
 const nau = "../assets/naucoins.png";
 
 export const TopBar = ({avatar, name, coins}) => {
+    const [context, setContext] = useContext(Context);
+
     return (
         <BlurView style={styles.topbarWrapper}>
             <View>
-                <Text style={styles.text}>{name}</Text>
+                <Text style={styles.text}>{context.login}</Text>
                 <Image source={avatar} />
             </View>
             <View style={styles.wrap}>

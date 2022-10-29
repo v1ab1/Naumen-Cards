@@ -7,10 +7,10 @@ const baseUrl = "http://172.20.10.9:5000"
 import { NavBar } from '../components/NavBar';
 import { TopBar } from '../components/TopBar';
 import { SelectedInventoryItem } from "./SelectedInventoryItem";
-
-
+import { Context } from "../Context";
+import { useContext } from "react";
 export function Profile(props) {
-    
+    const [context, setContext] = useContext(Context);
     const [items , setItems] = useState([
         {title:"item1"}
     ])
@@ -18,13 +18,11 @@ export function Profile(props) {
     const [selectedItem, setselectedItem] = useState();
 
     useEffect(() => {
-        axios.get(`${baseUrl}/get_items?login=stirk`)
+        axios.get(`${baseUrl}/get_items?login=${context.login}`)
             .then((res) => setItems(res.data))
     }, [])
 
     
-
-    let balance = 0;
 
     return (
         <View>
