@@ -1,14 +1,28 @@
 import { useState } from "react";
-import { View, Text, TextInput,TouchableOpacity } from "react-native";
+import { View, Text, TextInput,TouchableOpacity, Button,Image } from "react-native";
 import { NavBar } from '../components/NavBar';
 import { TopBar } from '../components/TopBar';
 import { StyleSheet } from "react-native";
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
 
+import * as ImagePicker from 'expo-image-picker'
 
-let RegistrateItem = (item, login) => {
-    axios.post(`${baseUrl}/upload_item?login=${login}&name=${item.name}&description=${item.description}`, {});
+let RegistrateItem = (item, login, photo) => {
+    console.log(photo);
+    const createFormData = (photo) => {
+        const data = new FormData();
+      
+        data.append('file', {
+          name: photo.fileName,
+          type: photo.type,
+          uri: Platform.OS === 'ios' ? photo.uri.replace('file://', '') : photo.uri,
+        });
+        return data;
+      };
+    data = createFormData(photo)
+    
+    axios.post(`${baseUrl}/upload_item?login=${login}&name=${item.name}&description=${item.description}`, data);
 }
 
 
@@ -16,17 +30,34 @@ let RegistrateItem = (item, login) => {
 
 
 export function AddingItem(props) {
-    
+    const [image, setImage] = useState(null);
     const [itemName, setitemName] = useState();
     const [itemPrice, setitemPrice] = useState();
     const [itemDescription, setitemDescription] = useState();
 
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        
+    
+        if (!result.cancelled) {
+          setImage(result);
+        }
+      };
 
     return (
         <View style={styles.body}>
             <TopBar />
             <View style={styles.content}>
                 <Text>Registrate item</Text>
+                <Button title="Pick an image from camera roll" onPress={pickImage} />
+                {image && <Image source={{ uri: image.uri }} style={{ width: 200, height: 200 }} />}
                 <TextInput
                     onChangeText={setitemName}
                     value={itemName}
@@ -43,7 +74,7 @@ export function AddingItem(props) {
                     RegistrateItem({
                         name: itemName,
                         description: itemDescription
-                    }, "stirk")
+                    }, "stirk", image);
                 }}>
                     <Text>Add Item</Text>
                 </TouchableOpacity>
