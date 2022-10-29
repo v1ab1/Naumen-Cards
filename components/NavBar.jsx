@@ -24,9 +24,13 @@ export const NavBar = (props) => {
                         <Image style={styles.plus} source={require(plus)} />
                     </View>
                 </TouchableOpacity>
-                <View style={styles.imageWrapper}>
-                    <Image style={styles.image} source={require(market)} />
-                </View>
+                <TouchableOpacity onPress={() => {
+                    props.navigation.navigate("Market")
+                }}>
+                    <View style={styles.imageWrapper}>
+                        <Image style={styles.image} source={require(market)} />
+                    </View>
+                </TouchableOpacity>
             </BlurView>
         </View>
     );
