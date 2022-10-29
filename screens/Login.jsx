@@ -95,6 +95,11 @@ export const Login = () => {
         alignItems: 'center',
         alignSelf: 'center',
         paddingTop: 30,
-        borderRadius: 40
+        borderRadius: 40,
+        backgroundColor: "rgba(33, 17, 52, 0.4)"
+    },
+    loginBackground: {
+      height: "100%",
+      width: "100%"
     }
   });
