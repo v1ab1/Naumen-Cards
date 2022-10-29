@@ -41,11 +41,12 @@ const styles = StyleSheet.create({
         flex: 1,
         position: "absolute",
         top: "85%",
-        width: '100%',
+        width: '90%',
         height: 110,
         overflow: "hidden",
         borderRadius: "50%",
-        zIndex: 100
+        zIndex: 100,
+        alignSelf: "center"
     },
     navbarWrapper: {
         flexDirection: "row",
