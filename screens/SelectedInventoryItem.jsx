@@ -2,7 +2,8 @@
 import { View, Text, TouchableOpacity,TextInput } from "react-native"
 import { StyleSheet } from "react-native";
 import { useState } from "react";
-
+import { Context } from "../Context";
+import { useContext } from "react";
 import axios from "axios";
 
 import { baseUrl } from "../baseUrl";
@@ -17,6 +18,8 @@ const SendItem = (item, toLogin, fromLogin) => {
 export const SelectedInventoryItem = (props) => {
     const [sellCost, setsellCost] = useState("");
     const [tradeLogin, settradeLogin] = useState("");
+    const [context, setContext] = useContext(Context);
+
       
 
     
@@ -28,7 +31,7 @@ export const SelectedInventoryItem = (props) => {
              <Text>{props.item.title + " " + props.item.description}</Text>
              <View style={styles.itemsnav}>
                 <TouchableOpacity style={styles.item} onPress={() => { 
-                    SellItem(props.item, sellCost, "stirk")
+                    SellItem(props.item, sellCost, context.login)
                 }}>
                     <Text>Sell</Text>
                     <TextInput
@@ -40,7 +43,7 @@ export const SelectedInventoryItem = (props) => {
                     />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.item} onPress={() => {
-                    SendItem(props.item, tradeLogin, "stirk")
+                    SendItem(props.item, tradeLogin, context.login)
                 }}>
                     <Text>Trade</Text>
                     <TextInput

@@ -5,10 +5,26 @@ import { NavBar } from '../components/NavBar';
 import { TopBar } from '../components/TopBar';
 import { MarketCards } from '../components/MarketCards';
 import { BlurView } from 'expo-blur';
-
+import { FlatList } from 'react-native-gesture-handler';
 const plus = '../assets/plus.png';
-
+import axios from 'axios';
+import { useEffect } from 'react';
+import { baseUrl } from '../baseUrl';
 export const Market = ({name, navigation}) => {
+
+
+    const [items, setItems] = useState([{
+        name:"server",
+        author:"not connected",
+        coins: 400
+    }]);
+
+    useEffect(() => {
+        axios.get(`${baseUrl}/get_market`)
+            .then((res) => setItems(res.data));
+    }, [])
+
+
     return (
         <View style={styles.container}>
             <TopBar />
@@ -17,6 +33,10 @@ export const Market = ({name, navigation}) => {
                 <Text style={styles.header}>Маркет</Text>
                 <View style={styles.rounded}>
                     <BlurView style={styles.items}>
+                    <FlatList
+                        data={items}
+                        renderItem={MarketCards}
+                        />
                     </BlurView>
                 </View>
             </View>

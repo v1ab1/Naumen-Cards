@@ -6,8 +6,10 @@ import { StyleSheet } from "react-native";
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
 import { BlurView } from 'expo-blur';
-
+import { Context } from "../Context";
+import { useContext } from "react";
 import * as ImagePicker from 'expo-image-picker'
+
 
 let RegistrateItem = (item, login, photo) => {
     
@@ -31,6 +33,7 @@ const background = '../assets/5.png';
 
 
 export function AddingItem(props) {
+    const [context, setContext] = useContext(Context);
     const [image, setImage] = useState(null);
     const [itemName, setitemName] = useState();
     const [itemPrice, setitemPrice] = useState();
@@ -101,7 +104,7 @@ export function AddingItem(props) {
                             RegistrateItem({
                                 name: itemName,
                                 description: itemDescription
-                            }, "stirk", image);
+                            }, context.login, image);
                             }}>
                             <Text style={[styles.pickText, styles.fixText]}>Опубликовать</Text>
                         </TouchableOpacity>

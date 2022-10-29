@@ -1,12 +1,15 @@
 import { StyleSheet, View, Image, Text, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import { BlurView } from 'expo-blur';
-
+import { baseUrl } from '../baseUrl';
 const nau = "../assets/naucoins.png";
 
-export const MarketCards = ({name, author, coins}) => {
+export const MarketCards = ({item}) => {
+    let name = item.title;
+    let author = item.owner;
+    let coins = item.price;
     return (
         <View style={styles.cardWrapper}>
-            <Image style={styles.image} source={require(nau)} />
+            <Image style={styles.image} source={{uri: `${baseUrl}/get_image?name=${item.id}`}} />
             <View style={styles.contentWrapper}>
                 <View>
                     <Text style={styles.name}>
