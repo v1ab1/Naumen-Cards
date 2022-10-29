@@ -7,7 +7,7 @@ import axios from 'axios';
 import { baseUrl } from '../baseUrl';
 const background = '../assets/login-background.png';
 
-
+import { UpdateCoins } from '../components/TopBar';
 
 
 
@@ -20,7 +20,10 @@ export const Login = (props) => {
       let resp = axios.get(`${baseUrl}/login?login=${login}&password=${password}`)
       .then((resp)=>{
         if(resp.data === 200){
-          setContext({login:login});
+          context.login = login;
+          context.coints = 0;
+          setContext(context);
+          UpdateCoins(context, setContext);
           callBack();
         }
       })

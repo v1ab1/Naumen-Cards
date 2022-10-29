@@ -8,7 +8,7 @@ import React, { useState } from "react";
 import { Context } from './Context';
 
 export default function App() {
-  const [context, setContext] = useState("default context value");
+  const [context, setContext] = useState({});
   
   return ( <Context.Provider value={[context, setContext]}>
             <Navigation />
