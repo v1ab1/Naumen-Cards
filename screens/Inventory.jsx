@@ -15,7 +15,7 @@ export class Inventory extends React.Component{
         
         if(this.props.login !== undefined){
             axios.get(`${baseUrl}/get_items?login=${this.props.login}`)
-            .then((res) => { this.setState({data : res.data}); console.log(res.data); this.render(); });
+            .then((res) => { this.setState({data : res.data}); this.render(); });
         }
         
     }
@@ -23,7 +23,7 @@ export class Inventory extends React.Component{
     render(){
         return (
             <View>
-            {this.props.viewItem ? <SelectedInventoryItem owned={this.props.owned} updateInventory={this.props.updateInventory} item={this.props.selectedItem} setViewItem={this.props.setViewItem}/>  
+            {this.props.viewItem ? <SelectedInventoryItem navigation={this.props.navigation} owned={this.props.owned} item={this.props.selectedItem} setViewItem={this.props.setViewItem}/>  
             :
             <View style={styles.inventory}>
                 <FlatList
