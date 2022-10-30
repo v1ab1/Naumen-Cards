@@ -32,7 +32,7 @@ export const SelectedProfile = ({selectedProfile, setisViewUserProfile}) => {
             <Text style={styles.text}>
                 {selectedProfile}
             </Text>
-            <Inventory items={inventoryItems} selectedItem={selectedItem} selectItem={setselectedItem} viewItem={viewItem} setViewItem={setViewItem}/>
+            <Inventory login={selectedProfile} items={inventoryItems} selectedItem={selectedItem} selectItem={setselectedItem} viewItem={viewItem} setViewItem={setViewItem}/>
         </View>
     )
 }
