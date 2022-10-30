@@ -125,7 +125,8 @@ export const Login = (props) => {
     container: {
       flex: 1,
       height: '100%',
-      width: '100%'
+      width: '100%',
+      zIndex: 300
     },
     image: {
       flex: 1,
