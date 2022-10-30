@@ -1,5 +1,5 @@
 import { useState} from 'react';
-import { StyleSheet, View, ScrollView, Image, Text, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Text, TouchableHighlight, KeyboardAvoidingView, ImageBackground } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { NavBar } from '../components/NavBar';
 import { TopBar } from '../components/TopBar';
@@ -10,8 +10,9 @@ const plus = '../assets/plus.png';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { baseUrl } from '../baseUrl';
+import { SelectedMarketItem } from './SelectedMarketItem';
 export const Market = ({name, navigation}) => {
-
+    const background = '../assets/4.png';
 
     const [items, setItems] = useState([{
         name:"server",
@@ -29,20 +30,22 @@ export const Market = ({name, navigation}) => {
 
     return (
         <View style={styles.container}>
-            <TopBar />
-            <NavBar navigation={navigation}/>
-            <View style={styles.itemsWrapper}>
-                <Text style={styles.header}>Маркет</Text>
-                <View style={styles.rounded}>
-                    <BlurView style={styles.items}>
-                        {isItemSelected ? null : 
-                    <FlatList
-                        data={items}
-                        renderItem={({item}) =>  <MarketCards setselectedItem={setselectedItem} setIsItemSelected={setIsItemSelected} item={item}/>}
-                        />}
-                    </BlurView>
+            <ImageBackground source={require(background)} resizeMode="cover" style={styles.imageBack}>
+                <TopBar />
+                <NavBar navigation={navigation}/>
+                <View style={styles.itemsWrapper}>
+                    <Text style={styles.header}>Маркет</Text>
+                    <View style={styles.rounded}>
+                        <BlurView style={styles.items}>
+                            {isItemSelected ? <SelectedMarketItem /> : 
+                            <FlatList
+                                data={items}
+                                renderItem={({item}) =>  <MarketCards setselectedItem={setselectedItem} setIsItemSelected={setIsItemSelected} item={item}/>}
+                                />}
+                        </BlurView>
+                    </View>
                 </View>
-            </View>
+            </ImageBackground>
         </View>
     );
 };
@@ -50,7 +53,7 @@ export const Market = ({name, navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        height: '100%',
+        height: '90%',
         width: '100%',
         backgroundColor: "#492675",
         position: 'relative'
