@@ -10,7 +10,7 @@ import { useContext } from "react";
 import * as ImagePicker from 'expo-image-picker'
 
 
-let RegistrateItem = (item, login, photo) => {
+let RegistrateItem = (item, login, photo, callBack) => {
     
     const createFormData = (photo) => {
         const data = new FormData();
@@ -24,7 +24,11 @@ let RegistrateItem = (item, login, photo) => {
       };
     data = createFormData(photo)
     
-    axios.post(`${baseUrl}/upload_item?login=${login}&name=${item.name}&description=${item.description}`, data);
+    axios.post(`${baseUrl}/upload_item?login=${login}&name=${item.name}&description=${item.description}`, data)
+    .then((res) => {
+        if(callBack)
+        callBack();
+    })
 }
 
 const background = '../assets/5.png';
@@ -102,7 +106,7 @@ export function AddingItem(props) {
                             RegistrateItem({
                                 name: itemName,
                                 description: itemDescription
-                            }, context.login, image);
+                            }, context.login, image, () => {props.navigation.navigate("Profile")});
                             }}>
                             <Text style={[styles.pickText, styles.fixText]}>Опубликовать</Text>
                         </TouchableOpacity>

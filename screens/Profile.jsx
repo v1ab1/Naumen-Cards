@@ -22,7 +22,7 @@ export function Profile(props) {
   ])
     const [viewItem, setViewItem] = useState(false)
     const [selectedItem, setselectedItem] = useState();
-    const [viewSubscribes, setviewSubscribes] = useState(true);
+    const [viewSubscribes, setviewSubscribes] = useState(false);
     const [image , setImage] = useState();
 
     const pickImage = async () => {
@@ -39,20 +39,14 @@ export function Profile(props) {
       }
     };
 
-    const updateInventory = () => {
-      useEffect(() => {
+    
+    
+    useEffect(() => {
         axios.get(`${baseUrl}/get_items?login=${context.login}`)
             .then((res) => setItems(res.data));
+        axios.get(`${baseUrl}/get_friends?login=${context.login}`)
+        .then((res) => setSubscribes(res.data));
     }, [])
-    };
-    updateInventory();
-    
-    // useEffect(() => {
-    //     axios.get(`${baseUrl}/get_items?login=${context.login}`)
-    //         .then((res) => setItems(res.data));
-    //     axios.get(`${baseUrl}/get_friends?login=${context.login}`)
-    //     .then((res) => setSubscribes(res.data));
-    // }, [])
 
     
 
@@ -75,7 +69,7 @@ export function Profile(props) {
             <View style={styles.rounded}>
               <BlurView style={styles.blur}>
                 {viewSubscribes ? <Subscribes subscribes={subscribes}/> :
-                  <Inventory items={items} updateInventory={updateInventory} owned={true} selectedItem={selectedItem} selectItem={setselectedItem} viewItem={viewItem} setViewItem={setViewItem}/>}    
+                  <Inventory login={context.login} items={items} owned={true} selectedItem={selectedItem} selectItem={setselectedItem} viewItem={viewItem} setViewItem={setViewItem}/>}    
               </BlurView>
             </View>      
           </View>
