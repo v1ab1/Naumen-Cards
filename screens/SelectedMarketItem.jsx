@@ -2,16 +2,19 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import { BlurView } from 'expo-blur';
 import { baseUrl } from "../baseUrl";
 import axios from "axios";
+import { Context } from "../Context";
+import { useContext } from "react";
 
 
 export const SelectedMarketItem = (props) => {
     const arrow = "../assets/arrow.png";
     const coins = "../assets/naucoins.png";
+    const [context, setContext] = useContext(Context);
 
     let item = props.selectedItem;
 
     const buyItem = (item) => {
-        axios.post(`${baseUrl}/buy_item?login=${item.owner}&id=${item.id}`, {})
+        axios.post(`${baseUrl}/buy_item?login=${context.login}&id=${item.id}`, {})
         .then(() => {props.setIsItemSelected(false)});
     };
 
