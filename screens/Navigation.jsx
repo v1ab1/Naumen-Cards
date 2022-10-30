@@ -15,15 +15,20 @@ const Stack = createNativeStackNavigator();
 export const Navigation = () => {
     const [context, setContext] = useContext(Context);
     const [isLogin, setIsLogin] = useState(false);
+    const [login, setLogin] = useState("");
+    const [coins, setCoins] = useState(0);
+
+
+    
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          {isLogin ? null : <Stack.Screen name="Login" component={Login} setIsLogin={setIsLogin} options={{headerShown: false }} />}
+          <Stack.Screen name="Login" component={({navigation}) => { return <Login setLogin={setLogin} setCoins={setCoins} setIsLogin={setIsLogin} navigation={navigation}/>}}  options={{headerShown: false }} />
           <Stack.Screen name="Profile" component={Profile} options={{headerShown: false }} />
           <Stack.Screen name="AddingItem" component={AddingItem} options={{headerShown: false }} />
           <Stack.Screen name="Market" component={Market} options={{headerShown: false }} />
         </Stack.Navigator>
-        {isLogin ? <TopBar/> : null}
+        <TopBar isLogin={isLogin} name={login} coins={coins}/>
       </NavigationContainer>
     );
 };

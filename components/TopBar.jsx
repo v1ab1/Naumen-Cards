@@ -16,20 +16,24 @@ export const UpdateCoins = (context, setContext) => {
     })
 }
 
-export const TopBar = ({avatar, name, coins}) => {
+export const TopBar = ({avatar, name, coins, isLogin}) => {
     const [context, setContext] = useContext(Context);
-      
+    console.log(isLogin === true, "islogin");
     return (
         <BlurView style={styles.topbarWrapper}>
-            <View>
-                <Text style={styles.text}>{context.login}</Text>
+            {isLogin ? <View>
+                <View>
+                <Text style={styles.text}>{name}</Text>
                 <Image source={avatar} />
             </View>
             <View style={styles.wrap}>
-                <Text style={styles.text}>{context.coins}</Text>
+                <Text style={styles.text}>{coins}</Text>
                 <Image style={styles.coin} source={require(nau)} />
             </View>
+            </View> : null}
+             
         </BlurView>
+    
     );
 };
 

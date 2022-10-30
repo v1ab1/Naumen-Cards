@@ -15,6 +15,8 @@ import { UpdateCoins } from '../components/TopBar';
 
 
 export const Login = (props) => {
+    console.log(props.setIsLogin);
+    //props.setIsLogin(true);
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
     const [context, setContext] = useContext(Context);
@@ -25,11 +27,14 @@ export const Login = (props) => {
       .then((resp)=>{
         if(resp.data === 200){
           context.login = login;
+          props.setLogin(login);
           context.coints = 0;
           context.isLogin = true;
           setContext(context);
           UpdateCoins(context, setContext);
+          props.setCoins(0);
           callBack();
+          props.setIsLogin(true);
         }
       })
     }
@@ -93,7 +98,7 @@ export const Login = (props) => {
                 <TouchableOpacity style={styles.button} underlayColor="white" onPress={() => {
                   LoginRequest(email, pass, () => { props.navigation.navigate("Profile")});
                 }} >
-                    <Text style={styles.buttonText} onPress={() => {props.setIsLogin(!isLogin)}} >
+                    <Text style={styles.buttonText}  >
                         Погрузимся в мир NFT
                     </Text>
                 </TouchableOpacity>
