@@ -30,7 +30,6 @@ export const Login = (props) => {
           setContext(context);
           UpdateCoins(context, setContext);
           callBack();
-          props.setIsLogin(true);
         }
       })
     }
@@ -94,7 +93,7 @@ export const Login = (props) => {
                 <TouchableOpacity style={styles.button} underlayColor="white" onPress={() => {
                   LoginRequest(email, pass, () => { props.navigation.navigate("Profile")});
                 }} >
-                    <Text style={styles.buttonText} >
+                    <Text style={styles.buttonText} onPress={() => {props.setIsLogin(!isLogin)}} >
                         Погрузимся в мир NFT
                     </Text>
                 </TouchableOpacity>
