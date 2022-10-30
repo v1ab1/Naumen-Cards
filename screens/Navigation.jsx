@@ -23,7 +23,8 @@ export const Navigation = () => {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Login" component={({navigation}) => { return <Login setLogin={setLogin} setCoins={setCoins} setIsLogin={setIsLogin} navigation={navigation}/>}}  options={{headerShown: false }} />
+          
+          <Stack.Screen name="Login" children={({navigation}) => { return (<Login setLogin={setLogin} setCoins={setCoins} setIsLogin={setIsLogin} navigation={navigation}/>)}}  options={{headerShown: false }} />
           <Stack.Screen name="Profile" component={Profile} options={{headerShown: false }} />
           <Stack.Screen name="AddingItem" component={AddingItem} options={{headerShown: false }} />
           <Stack.Screen name="Market" component={Market} options={{headerShown: false }} />
