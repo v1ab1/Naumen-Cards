@@ -1,39 +1,42 @@
 import { StyleSheet, View, Image, Text, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { baseUrl } from '../baseUrl';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const nau = "../assets/naucoins.png";
 
-export const MarketCards = ({item}) => {
+export const MarketCards = ({item, setselectedItem, setIsItemSelected}) => {
     let name = item.title;
     let author = item.owner;
     let coins = item.price;
     return (
-        <View style={styles.cardWrapper}>
-            <Image style={styles.image} source={{uri: `${baseUrl}/get_image?name=${item.id}`}} />
-            <View style={styles.contentWrapper}>
-                <View>
-                    <Text style={styles.name}>
-                        {name}
-                    </Text>
-                    <Text style={styles.author}>
-                        {author}
-                    </Text>
-                </View>
-                <View style={styles.desc}>
-                    <View style={styles.priceWrapper}>
-                        <Text style={styles.price}>
-                            {coins}
-                        </Text>
-                        <Image style={styles.coins} source={require(nau)} />
-                    </View>
+        <TouchableOpacity onPress={() => {setselectedItem(item); setIsItemSelected(true);}}>
+            <View style={styles.cardWrapper}>
+                <Image style={styles.image} source={{uri: `${baseUrl}/get_image?name=${item.id}`}} />
+                <View style={styles.contentWrapper}>
                     <View>
-                        <Text style={styles.descText}>
-                            Подробнее
+                        <Text style={styles.name}>
+                            {name}
                         </Text>
+                        <Text style={styles.author}>
+                            {author}
+                        </Text>
+                    </View>
+                    <View style={styles.desc}>
+                        <View style={styles.priceWrapper}>
+                            <Text style={styles.price}>
+                                {coins}
+                            </Text>
+                            <Image style={styles.coins} source={require(nau)} />
+                        </View>
+                        <View>
+                            <Text style={styles.descText}>
+                                Подробнее
+                            </Text>
+                        </View>
                     </View>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 

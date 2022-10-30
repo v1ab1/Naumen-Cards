@@ -18,6 +18,8 @@ export const Market = ({name, navigation}) => {
         author:"not connected",
         coins: 400
     }]);
+    const [isItemSelected, setIsItemSelected] = useState(false);
+    const [selectedItem, setselectedItem] = useState();
 
     useEffect(() => {
         axios.get(`${baseUrl}/get_market`)
@@ -33,10 +35,11 @@ export const Market = ({name, navigation}) => {
                 <Text style={styles.header}>Маркет</Text>
                 <View style={styles.rounded}>
                     <BlurView style={styles.items}>
+                        {isItemSelected ? null : 
                     <FlatList
                         data={items}
-                        renderItem={MarketCards}
-                        />
+                        renderItem={({item}) =>  <MarketCards setselectedItem={setselectedItem} setIsItemSelected={setIsItemSelected} item={item}/>}
+                        />}
                     </BlurView>
                 </View>
             </View>
