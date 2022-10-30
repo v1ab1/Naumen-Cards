@@ -131,8 +131,9 @@ const styles = StyleSheet.create({
         color: "white"
     },
     image: {
+        marginVertical: 20,
         width: "100%",
-        height: 200,
+        height: 250,
         resizeMode: "contain"
     },
     description: {

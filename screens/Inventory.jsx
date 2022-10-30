@@ -14,8 +14,8 @@ export const Inventory = (props) => {
         <View style={styles.inventory}>
              <FlatList
         data={props.items}
-        renderItem={MarketCards}
-        onPress={() => {props.selectItem(item); props.setViewItem(true)}}
+        renderItem={({item}) => <MarketCards item={item} onPress={() => {props.selectItem(item); props.setViewItem(true)}} />}
+        
         />
         </View>
     )
