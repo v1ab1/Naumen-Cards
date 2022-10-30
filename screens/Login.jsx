@@ -1,5 +1,5 @@
 import { useState} from 'react';
-import { StyleSheet, View, ImageBackground, Text, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, ImageBackground, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { useContext } from "react";
 import { Context } from '../Context';
@@ -89,32 +89,30 @@ export const Login = (props) => {
 
               {alreadyHasAccount ? 
               <View>
-                <TouchableHighlight style={styles.button} underlayColor="white" onPress={() => {
+                <TouchableOpacity style={styles.button} underlayColor="white" onPress={() => {
                   LoginRequest(email, pass, () => { props.navigation.navigate("Profile")});
                 }} >
                     <Text style={styles.buttonText} >
                         Погрузимся в мир NFT
                     </Text>
-                </TouchableHighlight>
-                <TouchableHighlight onPress={() => {setAlreadyHasAccount(false)}}>
-                  <Text>У меня еще нет аккаунта</Text>
-                </TouchableHighlight>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {setAlreadyHasAccount(false)}}>
+                  <Text style={styles.question}>У меня еще нет аккаунта...</Text>
+                </TouchableOpacity>
               </View>
                : 
                <View>
-                <TouchableHighlight style={styles.button} underlayColor="white" onPress={() => {
+                <TouchableOpacity style={styles.button} underlayColor="white" onPress={() => {
                   RegistrateRequest(email, pass, () => {LoginRequest(email, pass, () => { props.navigation.navigate("Profile")})});
                 }} >
                     <Text style={styles.buttonText} >
                         Регистрация
                     </Text>
-                </TouchableHighlight>
-                <TouchableHighlight onPress={() => {setAlreadyHasAccount(true)}}>
-                  <Text>У меня еуже есть аккаунт</Text>
-                </TouchableHighlight>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {setAlreadyHasAccount(true)}}>
+                  <Text style={styles.question}>У меня уже есть аккаунт...</Text>
+                </TouchableOpacity>
               </View> }
-              
-
             </BlurView>
           </KeyboardAvoidingView>
         </ImageBackground>
@@ -147,7 +145,7 @@ export const Login = (props) => {
         paddingHorizontal: 30,
         borderRadius: 30,
         fontSize: 15,
-        marginBottom: 40,
+        marginBottom: 0,
         marginHorizontal: 68,
         marginTop: 20
     },
@@ -179,7 +177,8 @@ export const Login = (props) => {
         alignSelf: 'center',
         borderRadius: 40,
         backgroundColor: "rgba(33, 17, 52, 0.4)",
-        overflow: "hidden"
+        overflow: "hidden",
+        width: "90%"
     },
     loginBackground: {
       height: "100%",
@@ -187,7 +186,13 @@ export const Login = (props) => {
     },
     blur: {
       paddingTop: 30,
+      width: "100%",
       alignItems: 'center',
       alignSelf: 'center'
+    },
+    question: {
+      color: "rgba(255,255,255,0.7)",
+      marginVertical: 20,
+      alignSelf: "center"
     }
   });
