@@ -51,12 +51,15 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
         height: 80,
         borderRadius: "50%",
-        marginRight: 20
+        marginRight: 20,
+        alignSelf: "center"
     },
     text: {
         color: "white",
         fontSize: 24,
-        alignSelf: "center"
+        alignSelf: "center",
+        marginTop: "2%",
+        marginLeft: "-5%"
     },
     backWrapper: {
         flexDirection: "row",

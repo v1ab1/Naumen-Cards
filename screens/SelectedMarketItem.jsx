@@ -46,7 +46,7 @@ export const SelectedMarketItem = (props) => {
 
 const styles = StyleSheet.create({
     body:{
-        width: "100%",
+        width: "90%",
         margin: 20,
         height: "100%"
     },
@@ -71,11 +71,12 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     image: {
-        marginVertical: 20,
-        width: "100%",
+        marginVertical: 10,
+        width: 250,
         height: 250,
         resizeMode: "contain",
-        alignSelf: "center"
+        alignSelf: "center",
+        justifyContent: "center"
     },
     description: {
         color: "white",

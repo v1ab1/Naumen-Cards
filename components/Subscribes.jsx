@@ -1,4 +1,4 @@
-import { View,Text,TouchableOpacity } from "react-native";
+import { View,Text,TouchableOpacity, StyleSheet } from "react-native";
 import { useContext, useState } from "react";
 import { Context } from "../Context";
 import { SubscribeItem } from "./SubscribeItem";
@@ -24,20 +24,55 @@ export const Subscribes = (props) => {
         <View>
             {isViewUserProfile ? <SelectedProfile setisViewUserProfile={setisViewUserProfile} selectedProfile={selectedProfile}/> 
             :
-        <View>
-        <FlatList
-        data={props.subscribes}
-        renderItem={({item}) => <Follower setisViewUserProfile={setisViewUserProfile} setSelectedProfile={setSelectedProfile}  item={item}/>}
-        />
-        <TextInput
-            onChangeText={setLogin}
-            value={login}
-            placeholder="логин"
-            />
-        <TouchableOpacity onPress={() => {Subscribe(context.login, login)}}>
-            <Text>Подписаться</Text>
-        </TouchableOpacity>
-        </View>}
+            <View>
+                <View style={styles.formWrap}>
+                    <TextInput
+                        onChangeText={setLogin}
+                        value={login}
+                        placeholder="Логин"
+                        placeholderTextColor="rgba(255,255,255,0.7)"
+                        style={styles.form}
+                        />
+                    <TouchableOpacity style={styles.formButton} onPress={() => {Subscribe(context.login, login)}}>
+                        <Text style={styles.formText}>Подписаться</Text>
+                    </TouchableOpacity>
+                </View>
+                <FlatList
+                data={props.subscribes}
+                renderItem={({item}) => <Follower setisViewUserProfile={setisViewUserProfile} setSelectedProfile={setSelectedProfile}  item={item}/>}
+                />
+            </View>}
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    cardWrapper: {
+        flexDirection: "row",
+        paddingHorizontal: 15,
+        justifyContent: "flex-start",
+        width: "80%",
+        marginBottom: "5%"
+    },
+    form: {
+        borderRadius: 40,
+        borderWidth: 2,
+        borderColor: "white",
+        fontSize: 24,
+        height: 40,
+        paddingHorizontal: 10,
+        color: "white",
+        width: "60%"
+    },
+    formWrap: {
+        flexDirection: "row"
+    },
+    formText: {
+        color: "white",
+        marginLeft: 20,
+        fontSize: 18
+    },
+    formButton: {
+        justifyContent: "center"
+    }
+});

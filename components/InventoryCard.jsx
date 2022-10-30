@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     cardWrapper: {
         flexDirection: "row",
         paddingHorizontal: 15,
-        marginTop: 30,
+        marginTop: 15,
         justifyContent: "center"
     },
     image: {

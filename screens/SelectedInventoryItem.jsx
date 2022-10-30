@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     image: {
         marginVertical: 20,
         width: "100%",
-        height: 250,
+        height: 230,
         resizeMode: "contain"
     },
     description: {

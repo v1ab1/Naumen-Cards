@@ -24,8 +24,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         justifyContent: "flex-start",
         width: "80%",
-        marginBottom: "5%",
-        
+        marginVertical: "3%"
     },
     image: {
         width: 80,
