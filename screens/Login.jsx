@@ -30,6 +30,7 @@ export const Login = (props) => {
           setContext(context);
           UpdateCoins(context, setContext);
           callBack();
+          props.setIsLogin(true);
         }
       })
     }

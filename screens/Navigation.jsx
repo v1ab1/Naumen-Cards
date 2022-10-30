@@ -1,5 +1,5 @@
 import { Context } from "../Context";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { Login } from './Login';
@@ -14,15 +14,16 @@ const Stack = createNativeStackNavigator();
 
 export const Navigation = () => {
     const [context, setContext] = useContext(Context);
+    const [isLogin, setIsLogin] = useState(false);
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          {context.isLogin ? null : <Stack.Screen name="Login" component={Login} options={{headerShown: false }} />}
+          {isLogin ? null : <Stack.Screen name="Login" component={Login} setIsLogin={setIsLogin} options={{headerShown: false }} />}
           <Stack.Screen name="Profile" component={Profile} options={{headerShown: false }} />
           <Stack.Screen name="AddingItem" component={AddingItem} options={{headerShown: false }} />
           <Stack.Screen name="Market" component={Market} options={{headerShown: false }} />
         </Stack.Navigator>
-        {context.isLogin ? <TopBar/> : null}
+        {isLogin ? <TopBar/> : null}
       </NavigationContainer>
     );
 };
