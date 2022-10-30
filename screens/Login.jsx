@@ -103,7 +103,7 @@ export const Login = (props) => {
                : 
                <View>
                 <TouchableHighlight style={styles.button} underlayColor="white" onPress={() => {
-                  RegistrateRequest(email, pass, () => { props.navigation.navigate("Profile")});
+                  RegistrateRequest(email, pass, () => {LoginRequest(email, pass, () => { props.navigation.navigate("Profile")})});
                 }} >
                     <Text style={styles.buttonText} >
                         Регистрация

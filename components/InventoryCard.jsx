@@ -4,6 +4,7 @@ import { baseUrl } from '../baseUrl';
 const nau = "../assets/naucoins.png";
 
 export const MarketCards = ({item}) => {
+    
     let name = item.title;
     return (
         <View style={styles.cardWrapper}>

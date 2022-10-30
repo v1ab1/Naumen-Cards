@@ -1,12 +1,13 @@
 import { StyleSheet, View, Image, Text, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import { BlurView } from 'expo-blur';
+import { baseUrl } from '../baseUrl';
 
 const nau = "../assets/naucoins.png";
 
 export const Follower = ({item}) => {
     return (
         <View style={styles.cardWrapper}>
-            <Image style={styles.image} source={(nau)} />
+            <Image style={styles.image} source={{uri: `${baseUrl}/get_image?name=${item}`}} />
             <Text style={styles.text}>
                 {item}
             </Text>
