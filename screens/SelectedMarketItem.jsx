@@ -7,6 +7,7 @@ import { useContext } from "react";
 import axios from "axios";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { baseUrl } from "../baseUrl";
+import { BlurView } from 'expo-blur';
 
 const SellItem = (item, price, login) => {
     axios.post(`${baseUrl}/sell_item?login=${login}&id=${item.id}&price=${price}`, {});
@@ -22,52 +23,32 @@ export const SelectedMarketItem = (props) => {
     const arrow = "../assets/arrow.png";
   
     return (
-        <KeyboardAwareScrollView style={styles.keyboard}>
-            <View style={styles.body}>
+        <View style={styles.body}>
+            <BlurView>
                 <TouchableOpacity style={styles.backWrapper} onPress={() => {props.setViewItem(false)}}>
                     <Image style={styles.arrow} source={require(arrow)} />
                     <Text style={styles.arrowText}>Назад</Text>
                 </TouchableOpacity>
-                <Text style={styles.name}>{props.item.title}</Text>
-                <Image style={styles.image} source={{uri: `${baseUrl}/get_image?name=${props.item.id}`}} />
-                <Text style={styles.description}>{props.item.description}</Text>
+                {/* <Text style={styles.name}>{props.item.title}</Text> */}
+                <Text style={styles.name}>Name</Text>
+                {/* <Image style={styles.image} source={{uri: `${baseUrl}/get_image?name=${props.item.id}`}} /> */}
+                {/* <Text style={styles.description}>{props.item.description}</Text> */}
+                <Text style={styles.description}>Desc</Text>
                 <View style={styles.itemsnav}>
-                    <KeyboardAvoidingView behavior='padding'>
-                        <TouchableOpacity style={[styles.item, styles.margin]} onPress={() => { 
-                            SellItem(props.item, sellCost, context.login)
-                        }}>
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={setsellCost}
-                                value={sellCost}
-                                placeholder="Цена"
-                                placeholderTextColor="rgba(255,255,255,0.7)"
-                            />
-                            <Text style={styles.inputText}>Продать</Text>
-                        </TouchableOpacity>
-                    </KeyboardAvoidingView>
-                    <TouchableOpacity style={[styles.item, styles.margin]} onPress={() => {
-                        SendItem(props.item, tradeLogin, context.login)
-                    }}>
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={settradeLogin}
-                            value={tradeLogin}
-                            placeholder="Логин"
-                            placeholderTextColor="rgba(255,255,255,0.7)"
-                        />
-                        <Text style={styles.inputText}>Подарить</Text>
+                    <TouchableOpacity>
+                        <Text>
+                            Купить
+                        </Text>
                     </TouchableOpacity>
                 </View>
-            </View>
-        </KeyboardAwareScrollView>
+            </BlurView>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     body:{
         width: "100%",
-        justifyContent: "space-between",
         height: "100%"
     },
     backWrapper: {
