@@ -26,11 +26,10 @@ export class MarketClass extends React.Component  {
 
     componentDidMount(){
         axios.get(`${baseUrl}/get_market`)
-            .then((res) => {this.setState({ items: res.data}); this.render();});
-    
-    }
+            .then((res) => this.setState({items : res.data}));
+    };
 
-    render(){
+    render() {
         let props = this.props;
         return (
             <View style={styles.container}>
@@ -40,10 +39,10 @@ export class MarketClass extends React.Component  {
                         <Text style={styles.header}>Маркет</Text>
                         <View style={styles.rounded}>
                             <BlurView style={styles.items}>
-                                {this.props.isItemSelected ? <SelectedMarketItem setIsItemSelected={this.props.setIsItemSelected} selectedItem={this.props.selectedItem}/> : 
+                                {props.isItemSelected ? <SelectedMarketItem setIsItemSelected={props.setIsItemSelected} selectedItem={props.selectedItem}/> : 
                                 <FlatList
                                     data={this?.state?.items ? this?.state?.items : []}
-                                    renderItem={({item}) =>  <MarketCards setselectedItem={this.props.setselectedItem} setIsItemSelected={this.props.setIsItemSelected} item={item}/>}
+                                    renderItem={({item}) =>  <MarketCards setselectedItem={props.setselectedItem} setIsItemSelected={props.setIsItemSelected} item={item}/>}
                                     />}
                             </BlurView>
                         </View>
@@ -52,10 +51,6 @@ export class MarketClass extends React.Component  {
             </View>
         );
     }
-
-    
-
-
     
 };
 

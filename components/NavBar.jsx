@@ -14,21 +14,21 @@ export const NavBar = (props) => {
                     props.navigation.navigate("Profile")
                 }}>
                     <View style={styles.imageWrapper}>
-                        <Image style={styles.image} source={require(profile)} />
+                        <Image style={[styles.image, props.a === 1 ? styles.active : null]} source={require(profile)} />
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
                     props.navigation.navigate("AddingItem")
                     }}>
                     <View style={styles.imageWrapper}>
-                        <Image style={styles.plus} source={require(plus)} />
+                        <Image style={[styles.plus, props.a === 2 ? styles.active : null]} source={require(plus)} />
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
                     props.navigation.navigate("Market")
                 }}>
                     <View style={styles.imageWrapper}>
-                        <Image style={styles.image} source={require(market)} />
+                        <Image style={[styles.image, props.a === 3 ? styles.active : null]} source={require(market)} />
                     </View>
                 </TouchableOpacity>
             </BlurView>
@@ -68,6 +68,10 @@ const styles = StyleSheet.create({
     },
     plus: {
         width: 100,
-        resizeMode: "contain"
+        resizeMode: "contain",
+        opacity: "0.5"
+    },
+    active: {
+        opacity: 1
     }
 });

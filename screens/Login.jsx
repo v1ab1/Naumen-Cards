@@ -81,7 +81,7 @@ export const Login = (props) => {
                     style={styles.input}
                     onChangeText={setEmail}
                     value={email}
-                    placeholder="Почта"
+                    placeholder="Логин"
                     placeholderTextColor="rgba(255,255,255,0.6)"
                 />
                 <TextInput 

@@ -37,7 +37,7 @@ export const SelectedInventoryItem = (props) => {
                         <Text style={styles.arrowText}>Назад</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.item}>
-                        {props.owned ? <View>
+                        {props.owned ? <View style={styles.row}>
                             <Text style={styles.arrowText}>Изменить</Text> 
                             <Image style={styles.pen} source={require(pen)} />
                         </View> : null }
@@ -138,7 +138,8 @@ const styles = StyleSheet.create({
         alignSelf: "center"
     },
     name: {
-        fontSize: 42,
+        fontSize: 30,
+        marginTop: 12,
         color: "white"
     },
     image: {
@@ -150,5 +151,8 @@ const styles = StyleSheet.create({
     description: {
         color: "white",
         fontSize: 20
+    },
+    row: {
+        flexDirection: "row"
     }
   });
