@@ -8,8 +8,9 @@ import axios from "axios";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { baseUrl } from "../baseUrl";
 
-const SellItem = (item, price, login) => {
-    axios.post(`${baseUrl}/sell_item?login=${login}&id=${item.id}&price=${price}`, {});
+const SellItem = (item, price, login, updateInventory) => {
+    axios.post(`${baseUrl}/sell_item?login=${login}&id=${item.id}&price=${price}`, {})
+    .then(()=>{ updateInventory() })
 }
 const SendItem = (item, toLogin, fromLogin) => {
     axios.post(`${baseUrl}/send_item?login=${fromLogin}&id=${item.id}&to=${toLogin}`, {});
@@ -21,7 +22,6 @@ export const SelectedInventoryItem = (props) => {
     const [context, setContext] = useContext(Context);
     const arrow = "../assets/arrow.png";
     const pen = "../assets//pen.png";
-  
     return (
         <KeyboardAwareScrollView style={styles.keyboard}>
             <View style={styles.body}>
@@ -45,7 +45,7 @@ export const SelectedInventoryItem = (props) => {
                 {props.owned ? <View style={styles.itemsnav}>
                     <KeyboardAvoidingView behavior='padding'>
                         <TouchableOpacity style={[styles.item, styles.margin]} onPress={() => { 
-                            SellItem(props.item, sellCost, context.login)
+                            SellItem(props.item, sellCost, context.login, props.updateInventory);
                         }}>
                             <TextInput
                                 style={styles.input}

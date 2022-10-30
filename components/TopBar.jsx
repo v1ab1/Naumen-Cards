@@ -18,7 +18,7 @@ export const UpdateCoins = (context, setContext) => {
 
 export const TopBar = ({avatar, name, coins}) => {
     const [context, setContext] = useContext(Context);
-
+      
     return (
         <BlurView style={styles.topbarWrapper}>
             <View>

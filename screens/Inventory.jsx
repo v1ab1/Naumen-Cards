@@ -9,10 +9,11 @@ import { SelectedInventoryItem } from "./SelectedInventoryItem";
   
 
 export const Inventory = (props) => {
- 
+    console.log(props.updateInventory);
+    
     return (
         <View>
-            {props.viewItem ? <SelectedInventoryItem owned={props.owned} item={props.selectedItem} setViewItem={props.setViewItem}/>  
+            {props.viewItem ? <SelectedInventoryItem owned={props.owned} updateInventory={props.updateInventory} item={props.selectedItem} setViewItem={props.setViewItem}/>  
             :
             <View style={styles.inventory}>
                 <FlatList

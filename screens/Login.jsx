@@ -26,6 +26,7 @@ export const Login = (props) => {
         if(resp.data === 200){
           context.login = login;
           context.coints = 0;
+          context.isLogin = true;
           setContext(context);
           UpdateCoins(context, setContext);
           callBack();

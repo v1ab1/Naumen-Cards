@@ -39,12 +39,20 @@ export function Profile(props) {
       }
     };
 
-    useEffect(() => {
+    const updateInventory = () => {
+      useEffect(() => {
         axios.get(`${baseUrl}/get_items?login=${context.login}`)
             .then((res) => setItems(res.data));
-        axios.get(`${baseUrl}/get_friends?login=${context.login}`)
-        .then((res) => setSubscribes(res.data));
     }, [])
+    };
+    updateInventory();
+    
+    // useEffect(() => {
+    //     axios.get(`${baseUrl}/get_items?login=${context.login}`)
+    //         .then((res) => setItems(res.data));
+    //     axios.get(`${baseUrl}/get_friends?login=${context.login}`)
+    //     .then((res) => setSubscribes(res.data));
+    // }, [])
 
     
 
@@ -67,7 +75,7 @@ export function Profile(props) {
             <View style={styles.rounded}>
               <BlurView style={styles.blur}>
                 {viewSubscribes ? <Subscribes subscribes={subscribes}/> :
-                  <Inventory items={items} owned={true} selectedItem={selectedItem} selectItem={setselectedItem} viewItem={viewItem} setViewItem={setViewItem}/>}    
+                  <Inventory items={items} updateInventory={updateInventory} owned={true} selectedItem={selectedItem} selectItem={setselectedItem} viewItem={viewItem} setViewItem={setViewItem}/>}    
               </BlurView>
             </View>      
           </View>
