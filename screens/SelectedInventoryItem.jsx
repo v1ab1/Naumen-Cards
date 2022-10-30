@@ -38,7 +38,8 @@ export const SelectedInventoryItem = (props) => {
                 <Text style={styles.name}>{props.item.title}</Text>
                 <Image style={styles.image} source={{uri: `${baseUrl}/get_image?name=${props.item.id}`}} />
                 <Text style={styles.description}>{props.item.description}</Text>
-                <View style={styles.itemsnav}>
+
+                {props.owned ? <View style={styles.itemsnav}>
                     <KeyboardAvoidingView behavior='padding'>
                         <TouchableOpacity style={[styles.item, styles.margin]} onPress={() => { 
                             SellItem(props.item, sellCost, context.login)
@@ -65,7 +66,8 @@ export const SelectedInventoryItem = (props) => {
                         />
                         <Text style={styles.inputText}>Подарить</Text>
                     </TouchableOpacity>
-                </View>
+                </View> 
+                : null}
             </View>
         </KeyboardAwareScrollView>
     )

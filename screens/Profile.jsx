@@ -36,7 +36,7 @@ export function Profile(props) {
       });
       if (!result.cancelled) {
         setImage(result);
-        
+
       }
     };
 
@@ -69,7 +69,7 @@ export function Profile(props) {
             <View style={styles.rounded}>
               <BlurView style={styles.blur}>
                 {viewSubscribes ? <Subscribes subscribes={subscribes}/> :
-                viewItem ? <SelectedInventoryItem item={selectedItem} setViewItem={setViewItem}/> : <Inventory items={items} selectItem={setselectedItem} setViewItem={setViewItem}/>}    
+                  <Inventory items={items} owner={true} selectedItem={selectedItem} selectItem={setselectedItem} viewItem={viewItem} setViewItem={setViewItem}/>}    
               </BlurView>
             </View>      
           </View>

@@ -7,11 +7,13 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 
-export const SelectedProfile = ({selectedProfile, setViewItem}) => {
+export const SelectedProfile = ({selectedProfile, setisViewUserProfile}) => {
     const arrow = "../assets/arrow.png";
     const [inventoryItems , setInventoryItems] = useState([
         {title:"not connect to server"}
     ])
+    const [viewItem, setViewItem] = useState(false)
+    const [selectedItem, setselectedItem] = useState();
 
     useEffect(() => {
         axios.get(`${baseUrl}/get_items?login=${selectedProfile}`)
@@ -22,7 +24,7 @@ export const SelectedProfile = ({selectedProfile, setViewItem}) => {
 
     return (
         <View>
-            <TouchableOpacity style={styles.backWrapper} onPress={() => {setViewItem(false)}}>
+            <TouchableOpacity style={styles.backWrapper} onPress={() => {setisViewUserProfile(false)}}>
                 <Image style={styles.arrow} source={require(arrow)} /> 
                 <Text style={styles.arrowText}>Назад</Text>
             </TouchableOpacity>
@@ -30,7 +32,7 @@ export const SelectedProfile = ({selectedProfile, setViewItem}) => {
             <Text style={styles.text}>
                 {selectedProfile}
             </Text>
-            <Inventory items={inventoryItems} />
+            <Inventory items={inventoryItems} selectedItem={selectedItem} selectItem={setselectedItem} viewItem={viewItem} setViewItem={setViewItem}/>
         </View>
     )
 }

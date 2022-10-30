@@ -22,7 +22,7 @@ export const Subscribes = (props) => {
 
     return (
         <View>
-            {isViewUserProfile ? <SelectedProfile setViewItem={setisViewUserProfile} selectedProfile={selectedProfile}/> 
+            {isViewUserProfile ? <SelectedProfile setisViewUserProfile={setisViewUserProfile} selectedProfile={selectedProfile}/> 
             :
         <View>
         <FlatList
@@ -33,8 +33,6 @@ export const Subscribes = (props) => {
             onChangeText={setLogin}
             value={login}
             placeholder="логин"
-            
-            
             />
         <TouchableOpacity onPress={() => {Subscribe(context.login, login)}}>
             <Text>Подписаться</Text>
