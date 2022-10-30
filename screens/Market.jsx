@@ -37,7 +37,7 @@ export const Market = ({name, navigation}) => {
                     <Text style={styles.header}>Маркет</Text>
                     <View style={styles.rounded}>
                         <BlurView style={styles.items}>
-                            {isItemSelected ? <SelectedMarketItem /> : 
+                            {isItemSelected ? <SelectedMarketItem setIsItemSelected={setIsItemSelected} selectedItem={selectedItem}/> : 
                             <FlatList
                                 data={items}
                                 renderItem={({item}) =>  <MarketCards setselectedItem={setselectedItem} setIsItemSelected={setIsItemSelected} item={item}/>}

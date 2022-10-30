@@ -31,8 +31,11 @@ export const SelectedInventoryItem = (props) => {
                         <Text style={styles.arrowText}>Назад</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.item}>
-                        <Text style={styles.arrowText}>Изменить</Text>
-                        <Image style={styles.pen} source={require(pen)} />
+                        {props.owned ? <View>
+                            <Text style={styles.arrowText}>Изменить</Text> 
+                            <Image style={styles.pen} source={require(pen)} />
+                        </View> : null }
+                        
                     </TouchableOpacity>
                 </View>
                 <Text style={styles.name}>{props.item.title}</Text>

@@ -69,7 +69,7 @@ export function Profile(props) {
             <View style={styles.rounded}>
               <BlurView style={styles.blur}>
                 {viewSubscribes ? <Subscribes subscribes={subscribes}/> :
-                  <Inventory items={items} owner={true} selectedItem={selectedItem} selectItem={setselectedItem} viewItem={viewItem} setViewItem={setViewItem}/>}    
+                  <Inventory items={items} owned={true} selectedItem={selectedItem} selectItem={setselectedItem} viewItem={viewItem} setViewItem={setViewItem}/>}    
               </BlurView>
             </View>      
           </View>
