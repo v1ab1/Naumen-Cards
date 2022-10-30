@@ -12,7 +12,7 @@ export const SelectedMarketItem = (props) => {
 
     const buyItem = (item) => {
         axios.post(`${baseUrl}/buy_item?login=${item.owner}&id=${item.id}`, {})
-        .then(() => {});
+        .then(() => {props.setIsItemSelected(false)});
     };
 
     return (

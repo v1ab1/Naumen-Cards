@@ -8,12 +8,13 @@ import axios from "axios";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { baseUrl } from "../baseUrl";
 
-const SellItem = (item, price, login) => {
+const SellItem = (item, price, login, callBack) => {
     axios.post(`${baseUrl}/sell_item?login=${login}&id=${item.id}&price=${price}`, {})
-    .then(()=>{ })
+    .then(()=>{ if(callBack) callBack(); });
 }
-const SendItem = (item, toLogin, fromLogin) => {
-    axios.post(`${baseUrl}/send_item?login=${fromLogin}&id=${item.id}&to=${toLogin}`, {});
+const SendItem = (item, toLogin, fromLogin, callBack) => {
+    axios.post(`${baseUrl}/send_item?login=${fromLogin}&id=${item.id}&to=${toLogin}`, {})
+    .then(() => {if (callBack) callBack();});
 }
 
 export const SelectedInventoryItem = (props) => {
@@ -22,6 +23,11 @@ export const SelectedInventoryItem = (props) => {
     const [context, setContext] = useContext(Context);
     const arrow = "../assets/arrow.png";
     const pen = "../assets//pen.png";
+
+    const naviagteToProfile = () => {
+        props.navigation.navigate("Profile");
+    }
+
     return (
         <KeyboardAwareScrollView style={styles.keyboard}>
             <View style={styles.body}>
@@ -45,7 +51,7 @@ export const SelectedInventoryItem = (props) => {
                 {props.owned ? <View style={styles.itemsnav}>
                     <KeyboardAvoidingView behavior='padding'>
                         <TouchableOpacity style={[styles.item, styles.margin]} onPress={() => { 
-                            SellItem(props.item, sellCost, context.login);
+                            SellItem(props.item, sellCost, context.login, () => {props.setViewItem(false)});
                         }}>
                             <TextInput
                                 style={styles.input}
@@ -58,7 +64,7 @@ export const SelectedInventoryItem = (props) => {
                         </TouchableOpacity>
                     </KeyboardAvoidingView>
                     <TouchableOpacity style={[styles.item, styles.margin]} onPress={() => {
-                        SendItem(props.item, tradeLogin, context.login)
+                        SendItem(props.item, tradeLogin, context.login, () => {props.setViewItem(false)})
                     }}>
                         <TextInput
                             style={styles.input}
