@@ -6,9 +6,13 @@ import { FlatList, TextInput } from "react-native-gesture-handler";
 import { Follower } from "./Follower";
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
+import { SelectedProfile } from "./SelectedProfile";
 export const Subscribes = (props) => {
     const [context, setContext] = useContext(Context);
     const [login, setLogin] = useState("");
+
+    const [isViewUserProfile, setisViewUserProfile] = useState(false);
+    const [selectedProfile, setSelectedProfile] = useState();
 
 
     let Subscribe = (from, to, callBack) => {
@@ -18,11 +22,13 @@ export const Subscribes = (props) => {
 
     return (
         <View>
-            <FlatList
-        data={props.subscribes}
-        renderItem={Follower}
-        />
+            {isViewUserProfile ? <SelectedProfile setViewItem={setisViewUserProfile} selectedProfile={selectedProfile}/> 
+            :
         <View>
+        <FlatList
+        data={props.subscribes}
+        renderItem={({item}) => <Follower setisViewUserProfile={setisViewUserProfile} setSelectedProfile={setSelectedProfile}  item={item}/>}
+        />
         <TextInput
             onChangeText={setLogin}
             value={login}
@@ -33,7 +39,7 @@ export const Subscribes = (props) => {
         <TouchableOpacity onPress={() => {Subscribe(context.login, login)}}>
             <Text>Подписаться</Text>
         </TouchableOpacity>
-        </View>
+        </View>}
         </View>
     )
 }
