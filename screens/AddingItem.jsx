@@ -58,6 +58,8 @@ export function AddingItem(props) {
         }
       };
 
+    const a = 2;
+
     return (
         <ImageBackground source={require(background)} style={styles.body}>
             <View style={styles.content}>
@@ -113,7 +115,7 @@ export function AddingItem(props) {
                     </BlurView>
                 </View>
             </View>
-            <NavBar navigation={props.navigation}/>
+            <NavBar a={a} navigation={props.navigation}/>
         </ImageBackground>
       );
 }

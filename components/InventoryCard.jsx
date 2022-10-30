@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     image: {
-        
         width: 100,
         resizeMode: "contain",
         height: 100,
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
     },
     name: {
         color: "white",
-        fontSize: 30
+        fontSize: 18
     },
     contentWrapper: {
         paddingHorizontal: 10,

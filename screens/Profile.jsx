@@ -48,7 +48,7 @@ export function Profile(props) {
         .then((res) => setSubscribes(res.data));
     }, [])
 
-    
+    const a = 1;
 
     return (
       <ImageBackground resizeMode="cover" source={require(background)}>
@@ -75,7 +75,7 @@ export function Profile(props) {
           </View>
           
         </View>
-        <NavBar navigation={props.navigation}/>
+        <NavBar a={a} navigation={props.navigation}/>
       </ImageBackground>
       );
 }

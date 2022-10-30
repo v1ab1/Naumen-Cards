@@ -26,11 +26,13 @@ export const Market = ({name, navigation}) => {
             .then((res) => setItems(res.data));
     }, [])
 
+    const a = 3;
+
 
     return (
         <View style={styles.container}>
             <ImageBackground source={require(background)} resizeMode="cover" style={styles.imageBack}>
-                <NavBar navigation={navigation}/>
+                <NavBar a={a} navigation={navigation}/>
                 <View style={styles.itemsWrapper}>
                     <Text style={styles.header}>Маркет</Text>
                     <View style={styles.rounded}>
