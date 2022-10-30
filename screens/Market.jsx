@@ -2,7 +2,6 @@ import { useState} from 'react';
 import { StyleSheet, View, ScrollView, Image, Text, TouchableHighlight, KeyboardAvoidingView, ImageBackground } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { NavBar } from '../components/NavBar';
-import { TopBar } from '../components/TopBar';
 import { MarketCards } from '../components/MarketCards';
 import { BlurView } from 'expo-blur';
 import { FlatList } from 'react-native-gesture-handler';
@@ -31,7 +30,6 @@ export const Market = ({name, navigation}) => {
     return (
         <View style={styles.container}>
             <ImageBackground source={require(background)} resizeMode="cover" style={styles.imageBack}>
-                <TopBar />
                 <NavBar navigation={navigation}/>
                 <View style={styles.itemsWrapper}>
                     <Text style={styles.header}>Маркет</Text>

@@ -5,7 +5,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 const baseUrl = "http://172.20.10.9:5000"
 import { NavBar } from '../components/NavBar';
-import { TopBar } from '../components/TopBar';
 import { SelectedInventoryItem } from "./SelectedInventoryItem";
 import { Context } from "../Context";
 import { useContext } from "react";
@@ -51,7 +50,6 @@ export function Profile(props) {
 
     return (
       <ImageBackground resizeMode="cover" source={require(background)}>
-        <TopBar/>
         <View style={styles.container}>
           <View style={styles.body}>
             <View style={styles.headerWrapper}>

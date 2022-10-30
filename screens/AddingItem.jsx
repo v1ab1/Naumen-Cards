@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { View, Text, TextInput,TouchableOpacity, Button, Image, KeyboardAvoidingView, ImageBackground } from "react-native";
 import { NavBar } from '../components/NavBar';
-import { TopBar } from '../components/TopBar';
 import { StyleSheet } from "react-native";
 import axios from "axios";
 import { baseUrl } from "../baseUrl";
@@ -57,7 +56,6 @@ export function AddingItem(props) {
 
     return (
         <ImageBackground source={require(background)} style={styles.body}>
-            <TopBar />
             <View style={styles.content}>
                 <Text style={styles.header}>Загрузка своего NFT</Text>
                 <View style={styles.rounded}>
