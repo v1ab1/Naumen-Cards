@@ -16,6 +16,13 @@ export const UpdateCoins = (context, setContext) => {
     })
 }
 
+export const UpdateCoinsCallback = (login, setContext) => {
+    axios.get(`${baseUrl}/get_coins?login=${login}`).
+    then((resp) => {
+        setContext(resp.data);
+    })
+}
+
 export const TopBar = ({avatar, name, coins, isLogin}) => {
     const [context, setContext] = useContext(Context);
     console.log(isLogin === true, "islogin");

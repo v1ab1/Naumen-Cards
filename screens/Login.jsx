@@ -11,7 +11,7 @@ import * as ImagePicker from 'expo-image-picker'
 const background = '../assets/login-background.png';
 
 import { UpdateCoins } from '../components/TopBar';
-
+import { UpdateCoinsCallback } from '../components/TopBar';
 
 
 export const Login = (props) => {
@@ -32,7 +32,7 @@ export const Login = (props) => {
           context.isLogin = true;
           setContext(context);
           UpdateCoins(context, setContext);
-          props.setCoins(0);
+          UpdateCoinsCallback(login, props.setCoins);
           callBack();
           props.setIsLogin(true);
         }
