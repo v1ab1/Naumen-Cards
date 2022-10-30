@@ -28,17 +28,14 @@ export const TopBar = ({avatar, name, coins, isLogin}) => {
     console.log(isLogin === true, "islogin");
     return (
         <BlurView style={styles.topbarWrapper}>
-            {isLogin ? <View>
-                <View>
-                <Text style={styles.text}>{name}</Text>
-                <Image source={avatar} />
-            </View>
-            <View style={styles.wrap}>
-                <Text style={styles.text}>{coins}</Text>
-                <Image style={styles.coin} source={require(nau)} />
-            </View>
+            {isLogin ? 
+            <View style={styles.justifyBetween}>
+                    <Text style={styles.text}>{name}</Text>
+                <View style={styles.wrap}>
+                    <Text style={styles.text}>{coins}</Text>
+                    <Image style={styles.coin} source={require(nau)} />
+                </View>
             </View> : null}
-             
         </BlurView>
     
     );
@@ -47,12 +44,12 @@ export const TopBar = ({avatar, name, coins, isLogin}) => {
 const styles = StyleSheet.create({
     topbarWrapper: {
         position: "absolute",
-        paddingTop: "15%",
+        paddingTop: "14%",
         width: "100%",
         paddingHorizontal: 30,
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingBottom: 20,
+        paddingBottom: 10,
         zIndex: 100
     },
     text: {
@@ -69,6 +66,11 @@ const styles = StyleSheet.create({
     },
     wrap: {
         flexDirection: "row"
+    },
+    justifyBetween: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        width: "100%"
     }
 });
 
