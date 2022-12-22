@@ -11,24 +11,21 @@ The application is a custom nft marketplace. In the application, you can registe
 
 ## How to launch
 Clone repo
+Open flask/main.py and change ip in last string to the local ip of the computer
+Open baseUrl.jsx and change ip to local ip of the computer
 Open a terminal in the flask folder and run
 ### `python main.py`
-### https://drive.google.com/file/d/13F13sQKOfatHCx2o_xo_7_qe41p1XfbC/view?usp=sharing
-After that, place the content in 
-### `*project folder*/src/pages/page11/videos/`
-
-Lastly, run in the root directory
-
-### `npm i`
-
-### `yarn install`
-
-### `npm start`
-
-### then run debug mode and choose `2160x1920` resolution on Responsive mode
-
+Open terminal in main directory and run
+### `expo start`
+Run emulator on macOS or Expo app on iOS following the instructions
 
 ## Technology stack
-React<br>
-React DnD<br>
-React DnD Preview
+React Native<br>
+React Navigation<br>
+Expo CLI<br>
+Expo Blur<br>
+Expo Image Picker<br>
+Expo Status Bar<br>
+Axios<br>
+Python<br>
+Python Flask<br>
