@@ -3,7 +3,9 @@
 ## About
 
 The project was developed during the hackathon https://vk.com/hackathon_urfu and won first place
+
 Development team:
+
 1) Teamlead frontend developer - me
 2) frontend developer - https://github.com/VenchasS
 3) backend developer - https://github.com/stirk1337
