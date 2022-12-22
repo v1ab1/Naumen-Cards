@@ -260,4 +260,4 @@ def get_image():
     return send_file("static/img/" + name + ".jpg")
 
 
-app.run(host="172.20.10.9")
+app.run(host="192.168.1.78")
